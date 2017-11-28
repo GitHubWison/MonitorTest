@@ -1,0 +1,7 @@
+#Mon Nov 13 10:58:13 CST 2017
+base.0=/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/build/intermediates/transforms/dex/debug/folders/1000/2/jcore-android-1.1.7_97a76461b7c2c9fffc694be6794f17dd89942b21
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/build/intermediates/transforms/dex/debug/folders/1000/2/jpush-android-3.0.9_1743d281fffad38bea401d55d7efab4e45d91264/classes.dex
+base.1=/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/build/intermediates/transforms/dex/debug/folders/1000/2/jpush-android-3.0.9_1743d281fffad38bea401d55d7efab4e45d91264
+file.0=/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/build/intermediates/transforms/dex/debug/folders/1000/2/jcore-android-1.1.7_97a76461b7c2c9fffc694be6794f17dd89942b21/classes.dex

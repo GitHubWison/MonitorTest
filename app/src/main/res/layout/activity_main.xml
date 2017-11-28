@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="handler_test"
+        android:id="@+id/handler_test_button"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="canvas_test"
+        android:id="@+id/canvas_test_button"
+        />
+    <TextView
+        android:layout_width="@dimen/x1270"
+        android:text=""
+        android:textSize="16sp"
+        android:id="@+id/padinfo_textview"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/test_textview"
+        android:background="@android:color/holo_blue_dark"
+        android:text="把"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:id="@+id/test_textview_2"
+        android:background="@android:color/holo_blue_dark"
+        />
+</LinearLayout>

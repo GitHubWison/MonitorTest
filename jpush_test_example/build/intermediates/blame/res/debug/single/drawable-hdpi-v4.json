@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/build/intermediates/res/merged/debug/drawable-hdpi-v4/richpush_btn_selector.xml",
+        "source": "/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/res/drawable-hdpi/richpush_btn_selector.xml"
+    },
+    {
+        "merged": "/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/build/intermediates/res/merged/debug/drawable-hdpi-v4/richpush_progressbar.xml",
+        "source": "/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/res/drawable-hdpi/richpush_progressbar.xml"
+    },
+    {
+        "merged": "/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/build/intermediates/res/merged/debug/drawable-hdpi-v4/corners_bg.xml",
+        "source": "/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/res/drawable-hdpi/corners_bg.xml"
+    },
+    {
+        "merged": "/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/build/intermediates/res/merged/debug/drawable-hdpi-v4/tiledstripes.xml",
+        "source": "/home/xuqiwei/documents/android/project/simple/JPushTest/jpush_test_example/res/drawable-hdpi/tiledstripes.xml"
+    }
+]
