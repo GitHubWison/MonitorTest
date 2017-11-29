@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.Path;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -46,29 +47,54 @@ public class WaveView extends View implements WaveFormInterface {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        this.canVas = canvas;
         drawWave(canvas);
+//        drawPathWave();
+    }
+    private void drawPathWave(){
+        //初始化Paint
+        Paint paint = new Paint();
+        paint.setColor(Color.BLUE);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(10f);
+//初始化Path
+        Path path = new Path();
+//将坐标系原点从（0,0）移动到（100,100）
+//        path.moveTo(100, 100);
+//画从（100,100）到（400,400）之间的直线
+        path.lineTo(400, 400);
+//path.rMoveTo(0, 100); //暂时注释
+        path.lineTo(400, 800);
+        canVas.drawPath(path, paint);
+
     }
 
     private void drawWave(Canvas canvas) {
-        this.canVas = canvas;
+
         canVas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         paint = new Paint();
         paint.setStrokeWidth(5);
         paint.setColor(Color.BLUE);
         if (datas.size() != 0) {
             for (int i = 0; i < datas.size(); i++) {
-                WaveFormBean temp = datas.get(i);
+                final WaveFormBean temp = datas.get(i);
                 if ((i + 1) < (datas.size() - 1)) {
-                    WaveFormBean temp2 = datas.get(i + 1);
+                     WaveFormBean temp2 = datas.get(i + 1);
                     if (temp!=null&&temp2!=null) {
-
                         canVas.drawLine(temp.getX(), BASE_LINE -getWaveY(temp.getY())*TIMS, temp2.getX(),
                                 BASE_LINE-getWaveY(temp2.getY())*TIMS, paint);
+                        if ((i-1)>0) {
+//                            Log.e("temp3","temp3");
+                            paint.setColor(Color.YELLOW);
+                            WaveFormBean temp3 = datas.get(i-1);
+                            canVas.drawLine(temp.getX(), BASE_LINE -getWaveY(temp.getY())*TIMS, temp3.getX(),
+                                    BASE_LINE-getWaveY(temp3.getY())*TIMS, paint);
+                        }
                     }else
                     {
                         Toast.makeText(getContext(), "nulllllllllllllllllll", Toast.LENGTH_SHORT).show();
                     }
+                    paint.setColor(Color.BLUE);
                 }
             }
         }

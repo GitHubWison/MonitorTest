@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".HandlerTestActivity" />
-        <activity android:name=".CanvasActivity"></activity>
+        <activity android:name=".CanvasActivity" />
+        <activity android:name=".DrawPathTestActivity"></activity>
     </application>
 
 </manifest>
