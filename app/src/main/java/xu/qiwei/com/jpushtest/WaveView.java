@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,21 +54,21 @@ public class WaveView extends View implements WaveFormInterface {
         this.canVas = canvas;
         canVas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
         paint = new Paint();
-        paint.setStrokeWidth(2);
+        paint.setStrokeWidth(5);
         paint.setColor(Color.BLUE);
         if (datas.size() != 0) {
-//            int singleWidth = getWidth() / datas.size();
-//            Log.e("singleWidth==",singleWidth+"");
-//            Log.e("totalwidth==",getWidth()+"");
             for (int i = 0; i < datas.size(); i++) {
                 WaveFormBean temp = datas.get(i);
-//                temp.setX(singleWidth);
                 if ((i + 1) < (datas.size() - 1)) {
                     WaveFormBean temp2 = datas.get(i + 1);
-//                    canVas.drawLine(i * singleWidth, BASE_LINE -getWaveY(temp.getY())*TIMS, (i + 1) * singleWidth,
-//                            BASE_LINE-getWaveY(temp2.getY())*TIMS, paint);
-                    canVas.drawLine(temp.getX(), BASE_LINE -getWaveY(temp.getY())*TIMS, temp2.getX(),
-                            BASE_LINE-getWaveY(temp2.getY())*TIMS, paint);
+                    if (temp!=null&&temp2!=null) {
+
+                        canVas.drawLine(temp.getX(), BASE_LINE -getWaveY(temp.getY())*TIMS, temp2.getX(),
+                                BASE_LINE-getWaveY(temp2.getY())*TIMS, paint);
+                    }else
+                    {
+                        Toast.makeText(getContext(), "nulllllllllllllllllll", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         }
@@ -101,44 +102,37 @@ public class WaveView extends View implements WaveFormInterface {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-//            final List<WaveFormBean> list = (List<WaveFormBean>) msg.obj;
-//            WaveView.this.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    datas.clear();
-//                    datas.addAll(list);
-//                    invalidateWithAni();
-//
-//                }
-//            });
-
+            datas.clear();
             final List<WaveFormBean> list = (List<WaveFormBean>) msg.obj;
             int count = 0;
             int singleWidth = getWidth() / list.size();
             while (count<list.size()) {
-                final int finalCount = count;
-                list.get(count).setX(count*singleWidth);
+                WaveFormBean waveFormBean = list.get(count);
+                waveFormBean.setX(count*singleWidth);
+                datas.add(waveFormBean);
                 WaveView.this.post(new Runnable() {
                     @Override
                     public void run() {
-                        showUI(list.get(finalCount),finalCount);
+                        invalidate();
                     }
                 });
-                count++;
+
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                count++;
             }
-            datas=new ArrayList<>();
-            Log.e("datassize==",count+"");
-//            datas.removeAll();
+            datas.clear();
 
         }
 
-        private void showUI(WaveFormBean waveFormBean, int index) {
+        private void showUI(WaveFormBean waveFormBean, int index,int totalCount) {
             datas.add(waveFormBean);
+            if (index>=totalCount-1) {
+                datas.clear();
+            }
             invalidate();
         }
     }
