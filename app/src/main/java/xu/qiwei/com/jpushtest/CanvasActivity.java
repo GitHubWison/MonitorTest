@@ -54,6 +54,10 @@ public class CanvasActivity extends AppCompatActivity {
         getMonitroData();
 
     }
+    public void refreshAni(View view){
+
+
+    }
 
     private void getMonitroData() {
         handler.sendEmptyMessage(new Random().nextInt(10));
@@ -68,8 +72,10 @@ public class CanvasActivity extends AppCompatActivity {
             super.handleMessage(msg);
             MonitorBean monitorBean = new MonitorBean(TESTBYTE);
             test_waveview.refreshData(monitorBean.getWaveFormBeanList());
+//
+//            test_waveview_118.refreshData(new MonitorBean(TESTBYTE_118).getWaveFormBeanList());
 
-            test_waveview_118.refreshData(new MonitorBean(TESTBYTE_118).getWaveFormBeanList());
+//            test_waveview.refreshStroke();
         }
     }
 }
