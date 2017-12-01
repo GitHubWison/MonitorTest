@@ -80,7 +80,7 @@ public class MonitorBean {
         System.arraycopy(bytes,27,temp,0,length);
         List<WaveFormBean> result = new ArrayList<>();
         for (int i = 0; i < temp.length; i++) {
-            result.add(new WaveFormBean(100 + 10 * i, temp[i]));
+            result.add(new WaveFormBean(0,0, temp[i]));
         }
         Log.e("","");
 
@@ -114,7 +114,7 @@ public class MonitorBean {
         System.arraycopy(bytes, 43, temp, 0, length);
         List<WaveFormBean> result = new ArrayList<>();
         for (int i = 0; i < temp.length; i++) {
-            result.add(new WaveFormBean(100 + 10 * i, temp[i]));
+            result.add(new WaveFormBean(0,0, temp[i]));
         }
         return result;
     }

@@ -7,10 +7,20 @@ package xu.qiwei.com.jpushtest.beans;
 public class WaveFormBean {
     private int x;
     private int y;
+    private byte wy;
 
-    public WaveFormBean(int x, int y) {
+    public WaveFormBean(int x, int y,byte wy) {
         this.x = x;
         this.y = y;
+        this.wy = wy;
+    }
+
+    public byte getWy() {
+        return wy;
+    }
+
+    public void setWy(byte wy) {
+        this.wy = wy;
     }
 
     public int getX() {

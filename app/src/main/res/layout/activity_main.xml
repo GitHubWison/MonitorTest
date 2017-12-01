@@ -43,4 +43,16 @@
         android:id="@+id/test_textview_2"
         android:background="@android:color/holo_blue_dark"
         />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:id="@+id/input_edittext"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="40sp"
+        android:id="@+id/cacular_button"
+        />
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView test_textview;
     private TextView test_textview_2;
     private Button canvas_test_button;
+    private EditText input_edittext;
+    private Button cacular_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         test_textview=(TextView)findViewById(R.id.test_textview);
         test_textview_2 = (TextView)findViewById(R.id.test_textview_2);
         canvas_test_button = (Button)findViewById(R.id.canvas_test_button);
+        input_edittext = (EditText) findViewById(R.id.input_edittext);
+        cacular_button = (Button)findViewById(R.id.cacular_button);
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
         Log.e("x==y", point.toString());
@@ -75,5 +80,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,CanvasActivity.class));
             }
         });
+        cacular_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                byte[] test = new byte[]{125};
+//                int inputno = Integer.parseInt(input_edittext.getText().toString());
+                cacular_button.setText(getWaveY(test[0])+"");
+            }
+        });
+    }
+    private int getWaveY(int originaly) {
+
+        return Utils.bytesToInt(new byte[]{(byte) originaly, 0, 0, 0}, 0);
     }
 }
