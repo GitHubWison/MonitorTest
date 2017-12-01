@@ -13,7 +13,7 @@
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
+            android:background="#FF888888"
             android:id="@+id/test_waveview"
             />
         <xu.qiwei.com.jpushtest.WaveView
