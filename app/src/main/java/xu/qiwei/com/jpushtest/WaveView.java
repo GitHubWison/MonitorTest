@@ -31,7 +31,9 @@ public class WaveView extends View implements WaveFormInterface {
     private int listCount = 0;
     private int BASE_LINE = 1000;
     private static final int FLAT_WAVE = 125;
-    private static final int TIMS = 4;
+    private int TIMS = 8;
+    private int waveUnit = 0;
+    private static final int maxPointCount = 200;
     //    待更新的位置
     private int count = 0;
     private List<WaveFormBean> datas = new ArrayList<>();
@@ -57,11 +59,18 @@ public class WaveView extends View implements WaveFormInterface {
     }
 
     private void initDatas() {
-        Log.e("heght=",getHeight()+"");
-        Log.e("heght half=",getHeight()/2+"");
-        Log.e("FLAT_WAVE=",FLAT_WAVE+"");
+//        Log.e("heght=",getHeight()+"");
+//        Log.e("heght half=",getHeight()/2+"");
+//        Log.e("FLAT_WAVE=",FLAT_WAVE+"");
+//        波形y值在250到(250-FLAT_WAVE)之间
+        TIMS = (getHeight())/(2*(Math.abs(250-FLAT_WAVE))) +1;
+//        Log.e("TIMS=",TIMS+"");
         BASE_LINE = getHeight()/2+FLAT_WAVE*TIMS;
-        Log.e("BASE_LINE=",BASE_LINE+"");
+//        Log.e("BASE_LINE=",BASE_LINE+"");
+//        int minumTime = (BASE_LINE-getHeight())/FLAT_WAVE;
+//        int maxumTime = (BASE_LINE)/FLAT_WAVE;
+
+
     }
 
     private void drawTest(Canvas canvas) {
@@ -138,8 +147,8 @@ public class WaveView extends View implements WaveFormInterface {
             while (count < list.size()) {
                 WaveFormBean waveFormBean = list.get(count);
                 waveFormBean.setX(count * singleWidth);
-                waveFormBean.setY(BASE_LINE - getWaveY(waveFormBean.getWy()) * TIMS);
-                Log.e("getyy=",getWaveY(waveFormBean.getWy())+"");
+                Log.e("getyy==",getWaveY(waveFormBean.getWy())+"");
+                waveFormBean.setY(caculatedY(getWaveY(waveFormBean.getWy())));
                 if (count - 1 >= 0) {
                     WaveFormBean temp_1 = list.get(count - 1);
                     refreshRect.set(temp_1.getX(), 0, temp_1.getX() + REFRESH_WIDTH, getHeight());
@@ -171,6 +180,11 @@ public class WaveView extends View implements WaveFormInterface {
         }
 
 
+    }
+    private int caculatedY(int wavey){
+        int result = BASE_LINE - wavey* TIMS;
+        Log.e("result==",result+"");
+        return result;
     }
 
 
