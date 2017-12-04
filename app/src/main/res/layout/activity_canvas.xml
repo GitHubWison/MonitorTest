@@ -6,38 +6,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_height="0dp">
+        android:orientation="vertical">
 
         <xu.qiwei.com.jpushtest.WaveView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="match_parent"
-            android:background="#FF888888"
             android:id="@+id/test_waveview"
-            />
-        <xu.qiwei.com.jpushtest.WaveView
-            android:layout_width="0dp"
-            android:layout_marginLeft="@dimen/x20"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
+            android:background="#FF888888" />
+
+        <xu.qiwei.com.jpushtest.WaveView
             android:id="@+id/test_waveview_118"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/x20"
+            android:layout_weight="1"
+            android:background="#FF888888" />
 
     </LinearLayout>
-
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="开始动画"
-    android:onClick="startAni"
-    />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="刷新"
+        android:onClick="startAni"
+        android:text="开始动画" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="refreshAni"
-        />
+        android:text="刷新" />
 </LinearLayout>

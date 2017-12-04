@@ -12,7 +12,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ import xu.qiwei.com.jpushtest.interfaces.WaveFormInterface;
 public class WaveView extends View implements WaveFormInterface {
     //    private Canvas canVas;
     private Paint paint;
-    private int listCount = 0;
+//    private int listCount = 0;
     private int BASE_LINE = 1000;
     private static final int FLAT_WAVE = 125;
     private int TIMS = 8;
@@ -38,7 +37,7 @@ public class WaveView extends View implements WaveFormInterface {
     private int count = 0;
     private List<WaveFormBean> datas = new ArrayList<>();
     private Rect refreshRect = new Rect(0, 0, 0, 0);
-    private static final int REFRESH_WIDTH = 40;
+    private static final int REFRESH_WIDTH = 10;
 //    private UpdateUIHandler updateUIHandler;
 
 
@@ -59,16 +58,9 @@ public class WaveView extends View implements WaveFormInterface {
     }
 
     private void initDatas() {
-//        Log.e("heght=",getHeight()+"");
-//        Log.e("heght half=",getHeight()/2+"");
-//        Log.e("FLAT_WAVE=",FLAT_WAVE+"");
 //        波形y值在250到(250-FLAT_WAVE)之间
         TIMS = (getHeight())/(2*(Math.abs(250-FLAT_WAVE))) +1;
-//        Log.e("TIMS=",TIMS+"");
         BASE_LINE = getHeight()/2+FLAT_WAVE*TIMS;
-//        Log.e("BASE_LINE=",BASE_LINE+"");
-//        int minumTime = (BASE_LINE-getHeight())/FLAT_WAVE;
-//        int maxumTime = (BASE_LINE)/FLAT_WAVE;
 
 
     }
@@ -120,7 +112,7 @@ public class WaveView extends View implements WaveFormInterface {
 
     @Override
     public void refreshData(List<WaveFormBean> waveFormBeanList) {
-        listCount = waveFormBeanList.size();
+//        listCount = waveFormBeanList.size();
         HandlerThread handlerThread = new HandlerThread("updateui");
         handlerThread.start();
         UpdateUIHandler updateUIHandler = new UpdateUIHandler(handlerThread.getLooper());
@@ -143,11 +135,11 @@ public class WaveView extends View implements WaveFormInterface {
 //            datas.clear();
             final List<WaveFormBean> list = (List<WaveFormBean>) msg.obj;
             count = 0;
+
             int singleWidth = getWidth() / list.size();
             while (count < list.size()) {
                 WaveFormBean waveFormBean = list.get(count);
                 waveFormBean.setX(count * singleWidth);
-                Log.e("getyy==",getWaveY(waveFormBean.getWy())+"");
                 waveFormBean.setY(caculatedY(getWaveY(waveFormBean.getWy())));
                 if (count - 1 >= 0) {
                     WaveFormBean temp_1 = list.get(count - 1);
@@ -183,7 +175,6 @@ public class WaveView extends View implements WaveFormInterface {
     }
     private int caculatedY(int wavey){
         int result = BASE_LINE - wavey* TIMS;
-        Log.e("result==",result+"");
         return result;
     }
 
