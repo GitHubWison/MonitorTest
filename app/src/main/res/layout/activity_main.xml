@@ -19,6 +19,12 @@
         android:text="canvas_test"
         android:id="@+id/canvas_test_button"
         />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="surfaceview_test_button"
+        android:id="@+id/surfaceview_test_button"
+        />
     <TextView
         android:layout_width="@dimen/x1270"
         android:text=""

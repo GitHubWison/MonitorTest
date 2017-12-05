@@ -38,8 +38,8 @@ public class WaveView extends View implements WaveFormInterface {
     private List<WaveFormBean> datas = new ArrayList<>();
     private Rect refreshRect = new Rect(0, 0, 0, 0);
     private static final int REFRESH_WIDTH = 10;
+    private boolean isNeedRefresh = false;
 //    private UpdateUIHandler updateUIHandler;
-
 
     public WaveView(Context context) {
         super(context);
@@ -80,20 +80,25 @@ public class WaveView extends View implements WaveFormInterface {
         paint.setStrokeWidth(5);
         if (datas.size() != 0) {
             for (int listIndex = 0; listIndex < datas.size(); listIndex++) {
+
+//                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
 //                目前待更新的数据处于count节点
 //                int indexTemp_0 = listIndex - 2;//第一个点
                 int indexTemp_1 = listIndex - 1;//第二个点
                 int indexTemp_2 = listIndex;//第三个点
 //                    表示已经获得了三个以下的点
                 if (indexTemp_1 > 0) {
-//                        表示已经获得了两个点
-                    WaveFormBean temp_1 = datas.get(indexTemp_1);
-                    WaveFormBean temp_2 = datas.get(indexTemp_2);
+//                    if (isNeedRefresh) {
+                        //                        表示已经获得了两个点
+                        WaveFormBean temp_1 = datas.get(indexTemp_1);
+                        WaveFormBean temp_2 = datas.get(indexTemp_2);
 //                        连接第二第三个点
-                    paint.setColor(Color.YELLOW);
-                    canvas.drawLine(temp_1.getX(), temp_1.getY(), temp_2.getX(), temp_2.getY(), paint);
+                        paint.setColor(Color.YELLOW);
+                        canvas.drawLine(temp_1.getX(), temp_1.getY(), temp_2.getX(), temp_2.getY(), paint);
+//                    }
 
-                    paint.setColor(Color.GRAY);
+
+                    paint.setColor(Color.BLUE);
                     canvas.drawRect(refreshRect, paint);
 
                 } else {
@@ -132,6 +137,7 @@ public class WaveView extends View implements WaveFormInterface {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+
 //            datas.clear();
             final List<WaveFormBean> list = (List<WaveFormBean>) msg.obj;
             count = 0;
@@ -149,20 +155,22 @@ public class WaveView extends View implements WaveFormInterface {
                 if (datas.size() - 1 < count) {
 //                    代表当前没有绘制心电图,需要添加心电数据
                     datas.add(waveFormBean);
+                    isNeedRefresh = true;
                 } else {
-//                    代表之前已经绘制过了心电图,需要更新心电数据
+                    isNeedRefresh = datas.get(count).getY() != waveFormBean.getY();
                     datas.set(count, waveFormBean);
+
                 }
 
                 WaveView.this.post(new Runnable() {
                     @Override
                     public void run() {
-                        invalidate();
+                            invalidate();
                     }
                 });
 
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

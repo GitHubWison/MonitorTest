@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private Button canvas_test_button;
     private EditText input_edittext;
     private Button cacular_button;
+    private Button surfaceview_test_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         canvas_test_button = (Button)findViewById(R.id.canvas_test_button);
         input_edittext = (EditText) findViewById(R.id.input_edittext);
         cacular_button = (Button)findViewById(R.id.cacular_button);
+        surfaceview_test_button = (Button)findViewById(R.id.surfaceview_test_button);
         Point point = new Point();
         getWindowManager().getDefaultDisplay().getSize(point);
         Log.e("x==y", point.toString());
@@ -86,6 +88,13 @@ public class MainActivity extends AppCompatActivity {
                 byte[] test = new byte[]{125};
 //                int inputno = Integer.parseInt(input_edittext.getText().toString());
                 cacular_button.setText(getWaveY(test[0])+"");
+            }
+        });
+        surfaceview_test_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,DrawPathTestActivity.class));
+
             }
         });
     }
