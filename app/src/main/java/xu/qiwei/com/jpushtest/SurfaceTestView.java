@@ -30,7 +30,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private Canvas mCanvas;
     // 子线程标志位
     private boolean isDrawing;
-    private int count = 0;
+    private int drawCount = 0;
     private Rect refreshRect = new Rect(0,0,0,0);
     private Paint paint;
     private SurfaceTestHandler surfaceTestHandler;
@@ -42,6 +42,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private static final int REFRESH_HEADER_WIDTH = 30;
     private Rect befRect = new Rect(0,0,0,0);
     private Rect aftRect = new Rect(0,0,0,0);
+
 
     private Bitmap bitmap;
 
@@ -90,16 +91,17 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         try {
             mCanvas = mSurfaceHolder.lockCanvas();
             Paint befPaint = new Paint();
-            befPaint.setColor(Color.BLACK);
+            befPaint.setColor(drawCount==0?Color.BLACK:Color.RED);
             Paint aftPaint = new Paint();
-            aftPaint.setColor(Color.BLUE);
+            aftPaint.setColor(Color.BLACK);
             befRect.set(0,0,x,getWidth());
             mCanvas.drawRect(befRect,befPaint);
+
             mCanvas.drawPath(mPath,paint);
             aftRect.set(x+REFRESH_HEADER_WIDTH,0,x+2*REFRESH_HEADER_WIDTH,getWidth());
 
             mCanvas.drawRect(aftRect,aftPaint);
-            drawRefreshHeader();
+
 
         }finally {
             if (mCanvas != null){
@@ -108,23 +110,18 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         }
     }
 
-    private void drawRefreshHeader() {
 
-
-
-    }
-
-    public void createLayer() {
-        Rect rect = new Rect(0,0,getWidth(),getHeight());
-        Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
-        mCanvas = mSurfaceHolder.lockCanvas();
-        mCanvas.saveLayerAlpha(0,0,getWidth(),getHeight(),127);
-        paint.setColor(Color.YELLOW);
-        mCanvas.drawLine(0,0,300,300,paint);
-        mCanvas.restore();
-        mSurfaceHolder.unlockCanvasAndPost(mCanvas);
-    }
+//    public void createLayer() {
+//        Rect rect = new Rect(0,0,getWidth(),getHeight());
+//        Paint paint = new Paint();
+//        paint.setColor(Color.WHITE);
+//        mCanvas = mSurfaceHolder.lockCanvas();
+//        mCanvas.saveLayerAlpha(0,0,getWidth(),getHeight(),127);
+//        paint.setColor(Color.YELLOW);
+//        mCanvas.drawLine(0,0,300,300,paint);
+//        mCanvas.restore();
+//        mSurfaceHolder.unlockCanvasAndPost(mCanvas);
+//    }
 
     private class  SurfaceTestHandler extends Handler{
         public SurfaceTestHandler(Looper looper) {
@@ -147,6 +144,14 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
                 mPath.lineTo(x,y);
                 count++;
             }
+            x=0;
+            y=0;
+            befRect.set(0,0,0,0);
+            aftRect.set(0,0,0,0);
+            mPath.moveTo(0,0);
+            mPath.reset();
+//            mCanvas.
+//            drawCount++;
         }
     }
 
