@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -35,13 +36,13 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private Paint paint;
     private SurfaceTestHandler surfaceTestHandler;
     private Path mPath = new Path();
-    private int x;
-    private int y ;
+    private float x;
+    private float y ;
     private final int BASELINE = 2000;
     private final int MULTIPLE_TIMES = 8;
     private static final int REFRESH_HEADER_WIDTH = 15;
-    private Rect befRect = new Rect(0,0,0,0);
-    private Rect aftRect = new Rect(0,0,0,0);
+    private RectF befRect = new RectF(0,0,0,0);
+    private RectF aftRect = new RectF(0,0,0,0);
 
 
     private Bitmap bitmap;
@@ -93,7 +94,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             Paint befPaint = new Paint();
             befPaint.setColor(drawCount==0?Color.BLACK:Color.RED);
             Paint aftPaint = new Paint();
-            aftPaint.setColor(Color.BLACK);
+            aftPaint.setColor(Color.BLUE);
             befRect.set(0,0,x,getWidth());
             mCanvas.drawRect(befRect,befPaint);
 
@@ -111,17 +112,6 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     }
 
 
-//    public void createLayer() {
-//        Rect rect = new Rect(0,0,getWidth(),getHeight());
-//        Paint paint = new Paint();
-//        paint.setColor(Color.WHITE);
-//        mCanvas = mSurfaceHolder.lockCanvas();
-//        mCanvas.saveLayerAlpha(0,0,getWidth(),getHeight(),127);
-//        paint.setColor(Color.YELLOW);
-//        mCanvas.drawLine(0,0,300,300,paint);
-//        mCanvas.restore();
-//        mSurfaceHolder.unlockCanvasAndPost(mCanvas);
-//    }
 
     private class  SurfaceTestHandler extends Handler{
         public SurfaceTestHandler(Looper looper) {
@@ -134,7 +124,9 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             super.handleMessage(msg);
             List<WaveFormBean> list = (List<WaveFormBean>)msg.obj;
             int count =0;
-            int widthSpace = getWidth()/list.size();
+            float viewWidth = getWidth();
+
+            float widthSpace = viewWidth/list.size();
             while (count<(list.size()-1))
             {
                 WaveFormBean temp = list.get(count);
@@ -150,8 +142,6 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             aftRect.set(0,0,0,0);
             mPath.moveTo(0,0);
             mPath.reset();
-//            mCanvas.
-//            drawCount++;
         }
     }
 
