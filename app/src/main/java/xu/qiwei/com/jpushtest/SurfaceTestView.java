@@ -38,11 +38,12 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private Path mPath = new Path();
     private float x;
     private float y ;
-    private final int BASELINE = 2000;
-    private final int MULTIPLE_TIMES = 8;
+    private  float BASELINE = 2000;
+    private  float MULTIPLE_TIMES = 8;
     private static final int REFRESH_HEADER_WIDTH = 15;
     private RectF befRect = new RectF(0,0,0,0);
     private RectF aftRect = new RectF(0,0,0,0);
+    private static final int FLAT_WAVE = 125;
 
 
     private Bitmap bitmap;
@@ -65,6 +66,8 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         handlerThread.start();
         surfaceTestHandler = new SurfaceTestHandler(handlerThread.getLooper());
 //        bitmap = Bitmap.createBitmap(REFRESH_HEADER_WIDTH,getHeight(), Bitmap.Config.ALPHA_8);
+
+
     }
 
     @Override
@@ -94,16 +97,12 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             Paint befPaint = new Paint();
             befPaint.setColor(drawCount==0?Color.BLACK:Color.RED);
             Paint aftPaint = new Paint();
-            aftPaint.setColor(Color.BLUE);
-            befRect.set(0,0,x,getWidth());
+            aftPaint.setColor(Color.BLACK);
+            befRect.set(0,0,x,getHeight());
             mCanvas.drawRect(befRect,befPaint);
-
             mCanvas.drawPath(mPath,paint);
-            aftRect.set(x+REFRESH_HEADER_WIDTH,0,x+2*REFRESH_HEADER_WIDTH,getWidth());
-
+            aftRect.set(x+REFRESH_HEADER_WIDTH,0,x+2*REFRESH_HEADER_WIDTH,getHeight());
             mCanvas.drawRect(aftRect,aftPaint);
-
-
         }finally {
             if (mCanvas != null){
                 mSurfaceHolder.unlockCanvasAndPost(mCanvas);
@@ -125,9 +124,19 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             List<WaveFormBean> list = (List<WaveFormBean>)msg.obj;
             int count =0;
             float viewWidth = getWidth();
+            //        波形y值在250到(250-FLAT_WAVE)之间
+            MULTIPLE_TIMES = (getHeight())/(2*(Math.abs(200-FLAT_WAVE))) +1;
+            BASELINE = getHeight()/2+FLAT_WAVE*MULTIPLE_TIMES;
 
             float widthSpace = viewWidth/list.size();
-            while (count<(list.size()-1))
+
+            x=0;
+            y=0;
+            befRect.set(0,0,0,0);
+            aftRect.set(0,0,0,0);
+            mPath.reset();
+            mPath.moveTo(0,caculatedY(125));
+            while (count<=(list.size()-1))
             {
                 WaveFormBean temp = list.get(count);
                 drawing();
@@ -136,17 +145,12 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
                 mPath.lineTo(x,y);
                 count++;
             }
-            x=0;
-            y=0;
-            befRect.set(0,0,0,0);
-            aftRect.set(0,0,0,0);
-            mPath.moveTo(0,0);
-            mPath.reset();
+
         }
     }
 
     private int caculatedY(int wavey){
-        int result = BASELINE - wavey* MULTIPLE_TIMES;
+        int result = (int)(BASELINE - wavey* MULTIPLE_TIMES);
         return result;
     }
     private int getWaveY(byte originaly) {

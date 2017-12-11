@@ -9,6 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+    <xu.qiwei.com.jpushtest.SurfaceTestView
+        android:id="@+id/surfacetest_view_2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <xu.qiwei.com.jpushtest.SurfaceTestView
+        android:id="@+id/surfacetest_view_3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <!--<xu.qiwei.com.jpushtest.SurfaceTestView-->
         <!--android:id="@+id/surfacetest_2_view"-->
