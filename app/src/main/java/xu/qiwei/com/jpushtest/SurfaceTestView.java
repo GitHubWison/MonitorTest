@@ -39,7 +39,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private int y ;
     private final int BASELINE = 2000;
     private final int MULTIPLE_TIMES = 8;
-    private static final int REFRESH_HEADER_WIDTH = 30;
+    private static final int REFRESH_HEADER_WIDTH = 15;
     private Rect befRect = new Rect(0,0,0,0);
     private Rect aftRect = new Rect(0,0,0,0);
 

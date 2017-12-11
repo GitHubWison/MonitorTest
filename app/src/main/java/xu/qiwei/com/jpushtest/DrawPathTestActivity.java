@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import xu.qiwei.com.jpushtest.beans.MonitorBean;
+import xu.qiwei.com.jpushtest.beans.WaveFormBean;
 
 public class DrawPathTestActivity extends Activity {
     boolean switchtag = false;
@@ -62,8 +66,13 @@ public class DrawPathTestActivity extends Activity {
 
     private void refreshMonitor() {
         MonitorBean monitorBean = new MonitorBean(switchtag?TESTBYTE:TESTBYTE_2);
-//        MonitorBean monitorBean2 = new MonitorBean(switchtag?TESTBYTE:TESTBYTE_2);
-//        MonitorBean monitorBean3 = new MonitorBean(switchtag?TESTBYTE:TESTBYTE_2);
+        MonitorBean monitorBean2 = new MonitorBean(switchtag?TESTBYTE:TESTBYTE_2);
+        MonitorBean monitorBean3 = new MonitorBean(switchtag?TESTBYTE:TESTBYTE_2);
+        List<WaveFormBean>templist = new ArrayList<>();
+        templist.addAll(monitorBean.getWaveFormBeanList());
+        templist.addAll(monitorBean2.getWaveFormBeanList());
+        templist.addAll(monitorBean3.getWaveFormBeanList());
+        monitorBean.setWaveFormBeanList(templist);
         surfacetest_view.refreshWave(monitorBean.getWaveFormBeanList());
 //        surfacetest_2_view.refreshWave(monitorBean2.getWaveFormBeanList());
 //        surfacetest_3_view.refreshWave(monitorBean3.getWaveFormBeanList());
