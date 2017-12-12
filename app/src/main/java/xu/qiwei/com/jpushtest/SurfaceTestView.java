@@ -44,6 +44,12 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private RectF befRect = new RectF(0,0,0,0);
     private RectF aftRect = new RectF(0,0,0,0);
     private static final int FLAT_WAVE = 125;
+//    目前放置了多少个波形
+
+    int currentWaveCount =0;
+//    在这个控件中一共需要放置的波形数量
+    private int totalWaveCount = 4;
+
 
 
     private Bitmap bitmap;
@@ -74,6 +80,12 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     public void surfaceCreated(SurfaceHolder holder) {
         isDrawing = true;
 //        new Thread(this).start();
+        //        波形y值在200到(200-FLAT_WAVE)之间
+        MULTIPLE_TIMES = (getHeight())/(2*(Math.abs(200-FLAT_WAVE))) +1;
+        BASELINE = getHeight()/2+FLAT_WAVE*MULTIPLE_TIMES;
+        mPath.reset();
+        mPath.moveTo(0,caculatedY(125));
+
     }
 
     @Override
@@ -124,28 +136,29 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             List<WaveFormBean> list = (List<WaveFormBean>)msg.obj;
             int count =0;
             float viewWidth = getWidth();
-            //        波形y值在200到(200-FLAT_WAVE)之间
-            MULTIPLE_TIMES = (getHeight())/(2*(Math.abs(200-FLAT_WAVE))) +1;
-            BASELINE = getHeight()/2+FLAT_WAVE*MULTIPLE_TIMES;
 
-            float widthSpace = viewWidth/list.size();
 
-            x=0;
-            y=0;
-            befRect.set(0,0,0,0);
-            aftRect.set(0,0,0,0);
-            mPath.reset();
-            mPath.moveTo(0,caculatedY(125));
+            float widthSpace = viewWidth/(list.size()*totalWaveCount);
             while (count<=(list.size()-1))
             {
                 WaveFormBean temp = list.get(count);
                 drawing();
-                x=count*widthSpace;
+                x=count*widthSpace+currentWaveCount*list.size()*widthSpace;
+//                x=x+widthSpace;
                 y = caculatedY(getWaveY(temp.getWy()));
                 mPath.lineTo(x,y);
                 count++;
             }
-
+            currentWaveCount++;
+            if (currentWaveCount==totalWaveCount) {
+                x=0;
+                y=0;
+                befRect.set(0,0,0,0);
+                aftRect.set(0,0,0,0);
+                mPath.reset();
+                mPath.moveTo(0,caculatedY(125));
+                currentWaveCount=0;
+            }
         }
     }
 

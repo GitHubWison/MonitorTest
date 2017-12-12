@@ -84,8 +84,8 @@ public class DrawPathTestActivity extends Activity {
 
         List<WaveFormBean> templist = new ArrayList<>();
         templist.addAll(monitorBean.getWaveFormBeanList());
-        templist.addAll(monitorBean2.getWaveFormBeanList());
-        templist.addAll(monitorBean3.getWaveFormBeanList());
+//        templist.addAll(monitorBean2.getWaveFormBeanList());
+//        templist.addAll(monitorBean3.getWaveFormBeanList());
 
         List<WaveFormBean> templist_2 = new ArrayList<>();
         templist_2.addAll(monitorBean2.getWaveFormBeanList());
@@ -101,8 +101,8 @@ public class DrawPathTestActivity extends Activity {
         monitorBean2.setWaveFormBeanList(templist_2);
         monitorBean3.setWaveFormBeanList(templist_3);
         surfacetest_view.refreshWave(monitorBean.getWaveFormBeanList());
-        surfacetest_view_2.refreshWave(monitorBean2.getWaveFormBeanList());
-        surfacetest_view_3.refreshWave(monitorBean3.getWaveFormBeanList());
+//        surfacetest_view_2.refreshWave(monitorBean2.getWaveFormBeanList());
+//        surfacetest_view_3.refreshWave(monitorBean3.getWaveFormBeanList());
         switchtag = !switchtag;
     }
 }

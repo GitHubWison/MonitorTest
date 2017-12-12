@@ -18,10 +18,21 @@ import static java.lang.Integer.parseInt;
 
 public class MonitorBean {
     private List<WaveFormBean> waveFormBeanList;
+//    返回数据的类型
     private int cateGory;
+//    时间
+    private String time;
+
+    private String nibp;
+    private String spo2;
+    private String pr;
+    private String resp;
+
+
 
     public MonitorBean(byte[] bytes) {
         cateGory = bytes[15];
+        this.time = setTime(bytes);
         waveFormBeanList = convertToWaveData(bytes);
 
     }
@@ -41,7 +52,9 @@ public class MonitorBean {
     public void setCateGory(int cateGory) {
         this.cateGory = cateGory;
     }
-
+//    private String getNibp(byte[] bytes){
+//
+//    }
     private List<WaveFormBean> convertToWaveData(byte[] bytes) {
         switch (cateGory) {
             case 101:
@@ -66,6 +79,24 @@ public class MonitorBean {
 
         }
         return null;
+    }
+
+    public String setTime(byte[] bytes) {
+        String retTime = "";
+        byte[] time = new byte[4];
+        System.arraycopy(bytes,8,time,0,4);
+        int timeInt = Utils.bytesToInt(time,0);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            long cDate = simpleDateFormat.parse("2005-03-24 00:00:00").getTime();
+            long glspacetime = (long)timeInt*1000;
+            long dDate = glspacetime+cDate;
+            Date fiDate = new Date(dDate);
+            retTime = simpleDateFormat.format(fiDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return retTime;
     }
 
     private List<WaveFormBean> respParser(byte[] bytes) {
@@ -117,5 +148,14 @@ public class MonitorBean {
             result.add(new WaveFormBean(0,0, temp[i]));
         }
         return result;
+    }
+//    获得bytes中[a,b)的值
+    private byte[] rangeByte(int a,int b,byte[] bytes)
+    {
+        int length = b-a;
+        byte[] temp = new byte[length];
+        System.arraycopy(bytes,a,temp,0,length);
+        return temp;
+
     }
 }
