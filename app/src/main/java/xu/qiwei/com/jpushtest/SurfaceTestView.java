@@ -124,7 +124,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             List<WaveFormBean> list = (List<WaveFormBean>)msg.obj;
             int count =0;
             float viewWidth = getWidth();
-            //        波形y值在250到(250-FLAT_WAVE)之间
+            //        波形y值在200到(200-FLAT_WAVE)之间
             MULTIPLE_TIMES = (getHeight())/(2*(Math.abs(200-FLAT_WAVE))) +1;
             BASELINE = getHeight()/2+FLAT_WAVE*MULTIPLE_TIMES;
 
