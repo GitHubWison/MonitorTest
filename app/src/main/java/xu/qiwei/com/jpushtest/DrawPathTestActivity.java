@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import xu.qiwei.com.jpushtest.beans.MonitorBean;
-import xu.qiwei.com.jpushtest.beans.WaveFormBean;
+import xu.qiwei.com.jpushtest.beans.WaveFormBeanShell;
 
 public class DrawPathTestActivity extends Activity {
     boolean switchtag = false;
@@ -54,6 +51,10 @@ public class DrawPathTestActivity extends Activity {
     public final void refreshWave(View view) {
         refreshMonitor();
     }
+    public final void saveWave(View view)
+    {
+        WaveDataHelper.getInstance().saveOrUpdateWaveInfo(TESTBYTE);
+    }
 
     private void initEvents() {
 //        surfaceview_test_button.setOnClickListener(new View.OnClickListener() {
@@ -72,35 +73,29 @@ public class DrawPathTestActivity extends Activity {
     }
 
     private void refreshMonitor() {
-        MonitorBean monitorBean = new MonitorBean(switchtag ? TESTBYTE : TESTBYTE_2);
-        MonitorBean monitorBean2 = new MonitorBean(switchtag ? TESTBYTE : TESTBYTE_2);
-        MonitorBean monitorBean3 = new MonitorBean(switchtag ? TESTBYTE : TESTBYTE_2);
+        MonitorBean monitorBean = WaveDataHelper.getInstance().getWaveInfo();
+        WaveFormBeanShell waveFormBeanShell = monitorBean.getWave_15();
+        surfacetest_view.refreshWave(waveFormBeanShell.getWaveFormBeanList());
 
-        MonitorBean monitorBean2_2 = new MonitorBean(switchtag ? TESTBYTE : TESTBYTE_2);
-        MonitorBean monitorBean3_2 = new MonitorBean(switchtag ? TESTBYTE : TESTBYTE_2);
-
-        MonitorBean monitorBean2_3 = new MonitorBean(switchtag ? TESTBYTE : TESTBYTE_2);
-        MonitorBean monitorBean3_3 = new MonitorBean(switchtag ? TESTBYTE : TESTBYTE_2);
-
-        List<WaveFormBean> templist = new ArrayList<>();
-        templist.addAll(monitorBean.getWaveFormBeanList());
+//        List<WaveFormBean> templist = new ArrayList<>();
+//        templist.addAll(monitorBean.getWaveFormBeanList());
 //        templist.addAll(monitorBean2.getWaveFormBeanList());
 //        templist.addAll(monitorBean3.getWaveFormBeanList());
 
-        List<WaveFormBean> templist_2 = new ArrayList<>();
-        templist_2.addAll(monitorBean2.getWaveFormBeanList());
-        templist_2.addAll(monitorBean2_2.getWaveFormBeanList());
-        templist_2.addAll(monitorBean3_2.getWaveFormBeanList());
+//        List<WaveFormBean> templist_2 = new ArrayList<>();
+//        templist_2.addAll(monitorBean2.getWaveFormBeanList());
+//        templist_2.addAll(monitorBean2_2.getWaveFormBeanList());
+//        templist_2.addAll(monitorBean3_2.getWaveFormBeanList());
+//
+//        List<WaveFormBean> templist_3 = new ArrayList<>();
+//        templist_3.addAll(monitorBean3.getWaveFormBeanList());
+//        templist_3.addAll(monitorBean2_3.getWaveFormBeanList());
+//        templist_3.addAll(monitorBean3_3.getWaveFormBeanList());
 
-        List<WaveFormBean> templist_3 = new ArrayList<>();
-        templist_3.addAll(monitorBean3.getWaveFormBeanList());
-        templist_3.addAll(monitorBean2_3.getWaveFormBeanList());
-        templist_3.addAll(monitorBean3_3.getWaveFormBeanList());
-
-        monitorBean.setWaveFormBeanList(templist);
-        monitorBean2.setWaveFormBeanList(templist_2);
-        monitorBean3.setWaveFormBeanList(templist_3);
-        surfacetest_view.refreshWave(monitorBean.getWaveFormBeanList());
+//        monitorBean.setWaveFormBeanList(templist);
+//        monitorBean2.setWaveFormBeanList(templist_2);
+//        monitorBean3.setWaveFormBeanList(templist_3);
+//        surfacetest_view.refreshWave(monitorBean.getWaveFormBeanList());
 //        surfacetest_view_2.refreshWave(monitorBean2.getWaveFormBeanList());
 //        surfacetest_view_3.refreshWave(monitorBean3.getWaveFormBeanList());
         switchtag = !switchtag;

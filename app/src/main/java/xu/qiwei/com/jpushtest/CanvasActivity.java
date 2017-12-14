@@ -8,11 +8,9 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import java.util.List;
 import java.util.Random;
 
 import xu.qiwei.com.jpushtest.beans.MonitorBean;
-import xu.qiwei.com.jpushtest.beans.WaveFormBean;
 
 public class CanvasActivity extends AppCompatActivity {
     private WaveView test_waveview;
@@ -111,14 +109,14 @@ public class CanvasActivity extends AppCompatActivity {
             MonitorBean monitorBean_3 = new MonitorBean(TESTBYTE);
             MonitorBean monitorBean_4 = new MonitorBean(TESTBYTE);
 
-            List<WaveFormBean> waveFormBeanTemp = monitorBean.getWaveFormBeanList();
-            waveFormBeanTemp.addAll(monitorBean_2.getWaveFormBeanList());
-            waveFormBeanTemp.addAll(monitorBean_3.getWaveFormBeanList());
-            waveFormBeanTemp.addAll(monitorBean_4.getWaveFormBeanList());
-//            monitorBean.getWaveFormBeanList().add(new WaveFormBean(0,0,123))
-
-            test_waveview.refreshData(monitorBean.getWaveFormBeanList());
-            test_waveview_118.refreshData(monitorBean.getWaveFormBeanList());
+//            List<WaveFormBean> waveFormBeanTemp = monitorBean.getWaveFormBeanList();
+//            waveFormBeanTemp.addAll(monitorBean_2.getWaveFormBeanList());
+//            waveFormBeanTemp.addAll(monitorBean_3.getWaveFormBeanList());
+//            waveFormBeanTemp.addAll(monitorBean_4.getWaveFormBeanList());
+////            monitorBean.getWaveFormBeanList().add(new WaveFormBean(0,0,123))
+//
+//            test_waveview.refreshData(monitorBean.getWaveFormBeanList());
+//            test_waveview_118.refreshData(monitorBean.getWaveFormBeanList());
 //
 //            test_waveview_118.refreshData(new MonitorBean(TESTBYTE_118).getWaveFormBeanList());
 
