@@ -81,8 +81,11 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         isDrawing = true;
 //        new Thread(this).start();
         //        波形y值在200到(200-FLAT_WAVE)之间
-        MULTIPLE_TIMES = (getHeight())/(2*(Math.abs(200-FLAT_WAVE))) +1;
-        BASELINE = getHeight()/2+FLAT_WAVE*MULTIPLE_TIMES;
+//        MULTIPLE_TIMES = (getHeight())/(2*(Math.abs(200-FLAT_WAVE))) +1;
+//        BASELINE = getHeight()/2+FLAT_WAVE*MULTIPLE_TIMES;
+
+        MULTIPLE_TIMES =1;
+        BASELINE = 1000;
         mPath.reset();
         mPath.moveTo(0,caculatedY(125));
 

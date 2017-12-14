@@ -100,7 +100,7 @@ public class MonitorBean {
             case 119:
                 this.pr = getPR(bytes);
                 this.spo2 = getSpo2(bytes);
-                this.wave_01 = getWaveDatas(bytes, 31, 30, 31, -2);
+                this.wave_02 = getWaveDatas(bytes, 31, 30, 31, -2);
                 break;
             case 120:
                 this.nibp = getNibp(bytes);
