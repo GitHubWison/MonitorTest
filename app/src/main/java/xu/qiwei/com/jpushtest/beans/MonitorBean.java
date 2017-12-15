@@ -94,7 +94,7 @@ public class MonitorBean {
                 this.wave_80 = getWaveDatas(bytes, 53, 52, 57 + length_113 + length_113, 80);
             case 118:
 
-                this.wave_01=getWaveDatas(bytes, 25, 24, 27, -1);
+                this.wave_01=getWaveDatas(bytes, 26, 25, 27, -1);
                 this.resp = getResp(bytes);
                 break;
             case 119:

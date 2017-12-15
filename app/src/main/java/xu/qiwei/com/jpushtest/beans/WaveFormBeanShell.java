@@ -1,5 +1,6 @@
 package xu.qiwei.com.jpushtest.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +12,11 @@ public class WaveFormBeanShell {
     private String waveProperty;
     private List<WaveFormBean> waveFormBeanList;
 
+    public WaveFormBeanShell() {
+        this.length = 0;
+        this.waveProperty = "";
+        this.waveFormBeanList = new ArrayList<>();
+    }
 
     public int getLength() {
         return length;

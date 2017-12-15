@@ -1,6 +1,7 @@
 package xu.qiwei.com.jpushtest;
 
 import xu.qiwei.com.jpushtest.beans.MonitorBean;
+import xu.qiwei.com.jpushtest.beans.WaveFormBeanShell;
 import xu.qiwei.com.jpushtest.interfaces.WaveDataSource;
 import xu.qiwei.com.jpushtest.utils.SharedPrefsUtils;
 
@@ -10,6 +11,24 @@ import xu.qiwei.com.jpushtest.utils.SharedPrefsUtils;
 
 public class WaveDataHelper implements WaveDataSource {
     private static final String ORIGINAL_WAVE_KEY="ORIGINAL_WAVE_KEY";
+
+    private static final String HR_KEY="HR_KEY";
+    private static final String PVC_KEY="PVC_KEY";
+
+    private static final String SPO2_KEY="SPO2_KEY";
+    private static final String PR_KEY="PR_KEY";
+    private static final String NIPB_KEY="NIPB_KEY";
+
+    private static final String RESP_KEY="RESP_KEY";
+    private static final String WAVE_15_KEY="WAVE_15_KEY";
+    private static final String WAVE_54_KEY="WAVE_54_KEY";
+
+    private static final String WAVE_55_KEY="WAVE_55_KEY";
+    private static final String WAVE_80_KEY="WAVE_80_KEY";
+    private static final String WAVE_01_KEY="WAVE_01_KEY";
+
+    private static final String WAVE_02_KEY="WAVE_02_KEY";
+
     private static WaveDataHelper waveDataHelper;
 
     public WaveDataHelper() {
@@ -36,14 +55,9 @@ public class WaveDataHelper implements WaveDataSource {
     public void saveOrUpdateWaveInfo(byte[] waveBytes) {
 //        1.取出原始数据
 //        2.判断原始数据，如果为空则新加，否则修改后增加
-        MonitorBean monitorBean = getWaveInfo();
-        if (monitorBean==null) {
-            monitorBean = new MonitorBean(waveBytes);
-        }else
-        {
             MonitorBean temp = new MonitorBean(waveBytes);
 //        根据数据的类型(cateGory)更新数据到数据库中
-            switch (monitorBean.getCateGory()){
+            switch (temp.getCateGory()){
                 case 101:
                 case 102:
                 case 103:
@@ -57,45 +71,218 @@ public class WaveDataHelper implements WaveDataSource {
                 case 111:
                 case 112:
 //                   更新hr/pvc/波形图
-                    monitorBean.setHr(temp.getHr());
-                    monitorBean.setPvc(temp.getPvc());
-                    monitorBean.setWave_15(temp.getWave_15());
+                    saveHR(temp.getHr());
+                    savePvc(temp.getPvc());
+                    saveWave_15(temp.getWave_15());
                     break;
                 case 113:
                     //                   更新hr/pvc/3个波形图
-                    monitorBean.setHr(temp.getHr());
-                    monitorBean.setPvc(temp.getPvc());
-                    monitorBean.setWave_54(temp.getWave_54());
-                    monitorBean.setWave_55(temp.getWave_55());
-                    monitorBean.setWave_80(temp.getWave_80());
+
+                    saveHR(temp.getHr());
+                    savePvc(temp.getPvc());
+                    saveWave_54(temp.getWave_54());
+                    saveWave_55(temp.getWave_55());
+                    saveWave_80(temp.getWave_80());
+
                 case 118:
 //                   更新resp/心电图
-                    monitorBean.setResp(temp.getResp());
-                    monitorBean.setWave_01(temp.getWave_01());
+                    saveResp(temp.getResp());
+                    saveWave_01(temp.getWave_01());
 
                     break;
                 case 119:
 //                   更新spo2/pr/波形图
-                    monitorBean.setPr(temp.getPr());
-                    monitorBean.setSpo2(temp.getSpo2());
-                    monitorBean.setWave_02(temp.getWave_02());
+                    savePR(temp.getPr());
+                    saveSpo2(temp.getSpo2());
+                    saveWave_02(temp.getWave_02());
                     break;
                 case 120:
-                    monitorBean.setNibp(temp.getNibp());
+                    saveNibp(temp.getNibp());
                     break;
                 default:
                     break;
 
             }
-        }
+    }
 
-//       刷新数据信息
-        SharedPrefsUtils.setObjectPreference(CommonApplication.context,ORIGINAL_WAVE_KEY,monitorBean);
+
+    @Override
+    public void saveHR(String hr) {
+        SharedPrefsUtils.setStringPreference(CommonApplication.context,HR_KEY,hr);
     }
 
     @Override
-    public MonitorBean getWaveInfo() {
-        MonitorBean monitorBean = (MonitorBean)SharedPrefsUtils.getObjectPreference(CommonApplication.context,ORIGINAL_WAVE_KEY,MonitorBean.class);
-        return monitorBean;
+    public void savePvc(String pvc) {
+        SharedPrefsUtils.setStringPreference(CommonApplication.context,PVC_KEY,pvc);
     }
+
+    @Override
+    public void saveSpo2(String spo2) {
+        SharedPrefsUtils.setStringPreference(CommonApplication.context,SPO2_KEY,spo2);
+    }
+
+    @Override
+    public void savePR(String pr) {
+        SharedPrefsUtils.setStringPreference(CommonApplication.context,PR_KEY,pr);
+    }
+
+    @Override
+    public void saveNibp(String nipb) {
+        SharedPrefsUtils.setStringPreference(CommonApplication.context,NIPB_KEY,nipb);
+    }
+
+    @Override
+    public void saveResp(String resp) {
+        SharedPrefsUtils.setStringPreference(CommonApplication.context,RESP_KEY,resp);
+    }
+
+    @Override
+    public void saveWave_15(WaveFormBeanShell waveFormBeanShell) {
+        SharedPrefsUtils.setObjectPreference(CommonApplication.context,WAVE_15_KEY,waveFormBeanShell);
+    }
+
+    @Override
+    public void saveWave_54(WaveFormBeanShell waveFormBeanShell) {
+        SharedPrefsUtils.setObjectPreference(CommonApplication.context,WAVE_54_KEY,waveFormBeanShell);
+
+    }
+
+    @Override
+    public void saveWave_55(WaveFormBeanShell waveFormBeanShell) {
+        SharedPrefsUtils.setObjectPreference(CommonApplication.context,WAVE_55_KEY,waveFormBeanShell);
+
+    }
+
+    @Override
+    public void saveWave_80(WaveFormBeanShell waveFormBeanShell) {
+        SharedPrefsUtils.setObjectPreference(CommonApplication.context,WAVE_80_KEY,waveFormBeanShell);
+
+    }
+
+    @Override
+    public void saveWave_01(WaveFormBeanShell waveFormBeanShell) {
+        SharedPrefsUtils.setObjectPreference(CommonApplication.context,WAVE_01_KEY,waveFormBeanShell);
+
+    }
+
+    @Override
+    public void saveWave_02(WaveFormBeanShell waveFormBeanShell) {
+        SharedPrefsUtils.setObjectPreference(CommonApplication.context,WAVE_02_KEY,waveFormBeanShell);
+
+    }
+
+    @Override
+    public String getStoredHR() {
+        String temp = SharedPrefsUtils.getStringPreference(CommonApplication.context,HR_KEY);
+        if (temp==null||"null".equals(temp)||"".equals(temp)) {
+            temp = "--";
+        }
+        return temp;
+    }
+
+    @Override
+    public String getStoredPvc() {
+        String temp = SharedPrefsUtils.getStringPreference(CommonApplication.context,PVC_KEY);
+        if (temp==null||"null".equals(temp)||"".equals(temp)) {
+            temp = "--";
+        }
+        return temp;
+    }
+
+    @Override
+    public String getStoredSpo2() {
+        String temp = SharedPrefsUtils.getStringPreference(CommonApplication.context,SPO2_KEY );
+        if (temp==null||"null".equals(temp)||"".equals(temp)) {
+            temp = "--";
+        }
+        return temp;
+    }
+
+    @Override
+    public String getStoredPR() {
+        String temp = SharedPrefsUtils.getStringPreference(CommonApplication.context,PR_KEY);
+        if (temp==null||"null".equals(temp)||"".equals(temp)) {
+            temp = "--";
+        }
+        return temp;
+    }
+
+    @Override
+    public String getStoredNibp() {
+        String temp = SharedPrefsUtils.getStringPreference(CommonApplication.context,NIPB_KEY );
+        if (temp==null||"null".equals(temp)||"".equals(temp)) {
+            temp = "--/--";
+        }
+        return temp;
+    }
+
+    @Override
+    public String getStoredResp() {
+        String temp = SharedPrefsUtils.getStringPreference(CommonApplication.context,RESP_KEY);
+        if (temp==null||"null".equals(temp)||"".equals(temp)) {
+            temp = "--";
+        }
+        return temp;
+    }
+
+    @Override
+    public WaveFormBeanShell getStoredWave_54() {
+        WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell)SharedPrefsUtils.getObjectPreference(CommonApplication.context,
+                WAVE_54_KEY,WaveFormBeanShell.class);
+        if (waveFormBeanShell==null) {
+            waveFormBeanShell = new WaveFormBeanShell();
+        }
+        return waveFormBeanShell;
+    }
+
+    @Override
+    public WaveFormBeanShell getStoredWave_55() {
+        WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell)SharedPrefsUtils.getObjectPreference(CommonApplication.context,
+                WAVE_55_KEY,WaveFormBeanShell.class);
+        if (waveFormBeanShell==null) {
+            waveFormBeanShell = new WaveFormBeanShell();
+        }
+        return waveFormBeanShell;
+    }
+
+    @Override
+    public WaveFormBeanShell getStoredWave_80() {
+        WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell)SharedPrefsUtils.getObjectPreference(CommonApplication.context,
+                WAVE_80_KEY,WaveFormBeanShell.class);
+        if (waveFormBeanShell==null) {
+            waveFormBeanShell = new WaveFormBeanShell();
+        }
+        return waveFormBeanShell;
+    }
+
+    @Override
+    public WaveFormBeanShell getStoredWave_01() {
+        WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell)SharedPrefsUtils.getObjectPreference(CommonApplication.context,
+                WAVE_01_KEY,WaveFormBeanShell.class);
+        if (waveFormBeanShell==null) {
+            waveFormBeanShell = new WaveFormBeanShell();
+        }
+        return waveFormBeanShell;
+    }
+
+    @Override
+    public WaveFormBeanShell getStoredWave_02() {
+        WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell)SharedPrefsUtils.getObjectPreference(CommonApplication.context,
+                WAVE_02_KEY,WaveFormBeanShell.class);
+        if (waveFormBeanShell==null) {
+            waveFormBeanShell = new WaveFormBeanShell();
+        }
+        return waveFormBeanShell;
+    }
+
+    @Override
+    public WaveFormBeanShell getStoredWave_15() {
+        WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell)SharedPrefsUtils.getObjectPreference(CommonApplication.context,
+                WAVE_15_KEY,WaveFormBeanShell.class);
+        if (waveFormBeanShell==null) {
+            waveFormBeanShell = new WaveFormBeanShell();
+        }
+        return waveFormBeanShell;
+    }
+
 }

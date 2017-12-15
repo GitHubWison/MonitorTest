@@ -7,34 +7,41 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:orientation="vertical">
 
         <xu.qiwei.com.jpushtest.SurfaceTestView
-            android:id="@+id/surfacetest_view"
+            android:id="@+id/surfacetest_view_15"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="8" />
 
         <xu.qiwei.com.jpushtest.SurfaceTestView
-            android:id="@+id/surfacetest_view_2"
+            android:id="@+id/surfacetest_view_54"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
             android:layout_weight="1" />
 
         <xu.qiwei.com.jpushtest.SurfaceTestView
-            android:id="@+id/surfacetest_view_3"
-            android:visibility="gone"
+            android:id="@+id/surfacetest_view_55"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
-        <TextView
+        <xu.qiwei.com.jpushtest.SurfaceTestView
+            android:id="@+id/surfacetest_view_80"
             android:layout_width="match_parent"
-            android:layout_weight="1"
             android:layout_height="0dp"
-            android:id="@+id/tztxt_textview"
-            />
+            android:layout_weight="1" />
+        <xu.qiwei.com.jpushtest.SurfaceTestView
+            android:id="@+id/surfacetest_view_01"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <xu.qiwei.com.jpushtest.SurfaceTestView
+            android:id="@+id/surfacetest_view_02"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
 
 
@@ -45,21 +52,30 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/surfaceview_test_button"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="刷新"
-            android:onClick="refreshWave" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="保存"
-            android:onClick="saveWave"/>
+        <TextView
+            style="@style/MonitorOtherDatas"
+            android:id="@+id/hr_textview"
+            />
+        <TextView
+            style="@style/MonitorOtherDatas"
+            android:id="@+id/pvc_textview"
+            />
+        <TextView
+            style="@style/MonitorOtherDatas"
+            android:id="@+id/spo2_textview"
+            />
+        <TextView
+            style="@style/MonitorOtherDatas"
+            android:id="@+id/pr_textview"
+            />
+        <TextView
+            style="@style/MonitorOtherDatas"
+            android:id="@+id/nibp_textview"
+            />
+        <TextView
+            style="@style/MonitorOtherDatas"
+            android:id="@+id/resp_textview"
+            />
     </LinearLayout>
 
 
