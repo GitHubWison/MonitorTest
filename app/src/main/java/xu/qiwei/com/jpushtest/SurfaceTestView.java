@@ -53,7 +53,9 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
 //    在这个控件中一共需要放置的波形数量
     private int totalWaveCount =3;
 
-
+    public void setTotalWaveCount(int totalWaveCount) {
+        this.totalWaveCount = totalWaveCount;
+    }
 
     private Bitmap bitmap;
 

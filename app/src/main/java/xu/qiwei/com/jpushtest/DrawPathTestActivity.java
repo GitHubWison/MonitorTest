@@ -73,8 +73,13 @@ public class DrawPathTestActivity extends Activity {
     private void downLoadMonitorData() {
 
 
-            monitorDataHandler.sendEmptyMessage(1);
+        monitorDataHandler.sendEmptyMessage(1);
         refreshWaveData(15);
+        refreshWaveData(54);
+        refreshWaveData(55);
+        refreshWaveData(80);
+        refreshWaveData(1);
+        refreshWaveData(2);
 
     }
 
@@ -134,7 +139,43 @@ public class DrawPathTestActivity extends Activity {
                 Log.e("更新数据代号", randomInt + "");
                 byte[] monitorBytes = SIMULATIONMONITORDATA.get(randomInt);
                 waveDataHelper.saveOrUpdateWaveInfo(monitorBytes);
-//                refreshOtherDatas();
+                hr_textview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        hr_textview.setText(waveDataHelper.getStoredHR());
+                    }
+                });
+                pvc_textview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        pvc_textview.setText(waveDataHelper.getStoredPvc());
+                    }
+                });
+                spo2_textview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        spo2_textview.setText(waveDataHelper.getStoredSpo2());
+                    }
+                });
+                pr_textview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        pr_textview.setText(waveDataHelper.getStoredPR());
+                    }
+                });
+                nibp_textview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        nibp_textview.setText(waveDataHelper.getStoredNibp());
+                    }
+                });
+                resp_textview.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        resp_textview.setText(waveDataHelper.getStoredResp());
+                    }
+                });
+
 
 
                 Log.e("get_monitor_data", "" + Thread.currentThread().getName());
@@ -176,6 +217,7 @@ public class DrawPathTestActivity extends Activity {
         surfacetest_view_80 = (SurfaceTestView) findViewById(R.id.surfacetest_view_80);
         surfacetest_view_01 = (SurfaceTestView) findViewById(R.id.surfacetest_view_01);
         surfacetest_view_02 = (SurfaceTestView) findViewById(R.id.surfacetest_view_02);
+        surfacetest_view_01.setTotalWaveCount(8);
     }
 
 
