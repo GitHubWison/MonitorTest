@@ -135,14 +135,15 @@ public class DrawPathTestActivity extends Activity {
 
             while (isdownloadMonitorData) {
                 //     //        模拟监护仪返回的数据
-                int randomInt = (int) (Math.random() * 4);
+                final int randomInt = (int) (Math.random() * 4);
                 Log.e("更新数据代号", randomInt + "");
                 byte[] monitorBytes = SIMULATIONMONITORDATA.get(randomInt);
                 waveDataHelper.saveOrUpdateWaveInfo(monitorBytes);
                 hr_textview.post(new Runnable() {
                     @Override
                     public void run() {
-                        hr_textview.setText(waveDataHelper.getStoredHR());
+                        hr_textview.setText(randomInt+"");
+//waveDataHelper.getStoredHR()
                     }
                 });
                 pvc_textview.post(new Runnable() {
@@ -217,7 +218,10 @@ public class DrawPathTestActivity extends Activity {
         surfacetest_view_80 = (SurfaceTestView) findViewById(R.id.surfacetest_view_80);
         surfacetest_view_01 = (SurfaceTestView) findViewById(R.id.surfacetest_view_01);
         surfacetest_view_02 = (SurfaceTestView) findViewById(R.id.surfacetest_view_02);
-        surfacetest_view_01.setTotalWaveCount(8);
+
+        surfacetest_view_15.setTotalWaveCount(8);
+        surfacetest_view_01.setTotalWaveCount(16);
+        surfacetest_view_02.setTotalWaveCount(16);
     }
 
 
@@ -240,6 +244,7 @@ public class DrawPathTestActivity extends Activity {
         resp_textview.setText(waveDataHelper.getStoredResp());
 
     }
+
 
     //刷新波形的方法
     private void refreshWaveData(int waveFlag) {

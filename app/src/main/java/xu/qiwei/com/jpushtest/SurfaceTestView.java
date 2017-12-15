@@ -13,7 +13,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -40,12 +39,12 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private Path mPath = new Path();
     private float x;
     private float y ;
-    private  float BASELINE = 2000;
-    private  float MULTIPLE_TIMES = 8;
+    private  float BASELINE = -1;
+    private  float MULTIPLE_TIMES = -1;
     private static final int REFRESH_HEADER_WIDTH = 15;
     private RectF befRect = new RectF(0,0,0,0);
     private RectF aftRect = new RectF(0,0,0,0);
-    private static final int FLAT_WAVE = 125;
+    private static final int FLAT_WAVE = 50;
     private WaveDrawFinishCallBack waveDrawFinishCallBack;
 //    目前放置了多少个波形
 
@@ -55,6 +54,14 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
 
     public void setTotalWaveCount(int totalWaveCount) {
         this.totalWaveCount = totalWaveCount;
+    }
+
+    public void setMULTIPLE_TIMES(float MULTIPLE_TIMES) {
+        this.MULTIPLE_TIMES = MULTIPLE_TIMES;
+    }
+
+    public void setBASELINE(float BASELINE) {
+        this.BASELINE = BASELINE;
     }
 
     private Bitmap bitmap;
@@ -91,8 +98,13 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         isDrawing = true;
 //        new Thread(this).start();
         //        波形y值在200到(200-FLAT_WAVE)之间
-        MULTIPLE_TIMES = (getHeight())/(2*(Math.abs(200-FLAT_WAVE))) +1;
-        BASELINE = getHeight()/2+FLAT_WAVE*MULTIPLE_TIMES;
+        if(MULTIPLE_TIMES<0){
+            MULTIPLE_TIMES = (getHeight())/(2*(Math.abs(200-FLAT_WAVE))) +1;
+        }
+        if (BASELINE<0){
+            BASELINE = getHeight()/2+FLAT_WAVE*MULTIPLE_TIMES;
+        }
+
 //
 //        MULTIPLE_TIMES =1;
 //        BASELINE = 1000;
@@ -151,7 +163,6 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             List<WaveFormBean> list = (List<WaveFormBean>)msg.obj;
-            Log.e("nulll",list.size()+"");
             if (list.size()==0) {
                 return;
             }
@@ -162,11 +173,16 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             float widthSpace = viewWidth/(list.size()*totalWaveCount);
             while (count<=(list.size()-1))
             {
+
                 WaveFormBean temp = list.get(count);
                 drawing();
                 x=count*widthSpace+currentWaveCount*list.size()*widthSpace;
 //                x=x+widthSpace;
                 y = caculatedY(getWaveY(temp.getWy()));
+                if (count==0&&currentWaveCount==0) {
+//                    初始值
+                    mPath.moveTo(x,y);
+                }
                 mPath.lineTo(x,y);
                 count++;
             }
