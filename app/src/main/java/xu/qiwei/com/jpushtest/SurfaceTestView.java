@@ -13,7 +13,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -164,7 +163,6 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Log.e("running==","running=====");
             WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell) msg.obj;
             List<WaveFormBean> list = waveFormBeanShell.getWaveFormBeanList();
             int count = 0;
