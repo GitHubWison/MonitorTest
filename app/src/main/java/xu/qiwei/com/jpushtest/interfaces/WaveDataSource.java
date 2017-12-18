@@ -14,6 +14,7 @@ public interface WaveDataSource {
 ////    获取最近一笔的wave
 //    public MonitorBean getWaveInfo();
 //    获取
+    public void saveTime(String time);
     public void saveHR(String hr);
     public void savePvc(String pvc);
     public void saveSpo2(String spo2);
@@ -33,11 +34,15 @@ public interface WaveDataSource {
     public String getStoredPR();
     public String getStoredNibp();
     public String getStoredResp();
+    public String getTime();
+
     public WaveFormBeanShell getStoredWave_54();
     public WaveFormBeanShell getStoredWave_55();
     public WaveFormBeanShell getStoredWave_80();
     public WaveFormBeanShell getStoredWave_01();
     public WaveFormBeanShell getStoredWave_02();
     public WaveFormBeanShell getStoredWave_15();
+
+
 
 }

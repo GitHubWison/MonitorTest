@@ -7,6 +7,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -49,6 +50,9 @@ public class DrawPathTestActivity extends Activity {
     private TextView pr_textview;
     private TextView nibp_textview;
     private TextView resp_textview;
+
+    private Button time_button;
+
 
 
     //    private TextView tztxt_textview;
@@ -180,6 +184,12 @@ public class DrawPathTestActivity extends Activity {
                     }
                 });
 
+                time_button.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        time_button.setText(waveDataHelper.getTime());
+                    }
+                });
 
 
                 Log.e("get_monitor_data", "" + Thread.currentThread().getName());
@@ -208,12 +218,14 @@ public class DrawPathTestActivity extends Activity {
     }
 
     private void initViews() {
+        time_button = (Button)findViewById(R.id.time_button);
         hr_textview = (TextView) findViewById(R.id.hr_textview);
         pvc_textview = (TextView) findViewById(R.id.pvc_textview);
         spo2_textview = (TextView) findViewById(R.id.spo2_textview);
         pr_textview = (TextView) findViewById(R.id.pr_textview);
         nibp_textview = (TextView) findViewById(R.id.nibp_textview);
         resp_textview = (TextView) findViewById(R.id.resp_textview);
+
 
         surfacetest_view_15 = (SurfaceTestView) findViewById(R.id.surfacetest_view_15);
         surfacetest_view_54 = (SurfaceTestView) findViewById(R.id.surfacetest_view_54);

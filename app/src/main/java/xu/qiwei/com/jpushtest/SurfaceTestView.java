@@ -184,12 +184,13 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
                 }
                 currentWaveCount++;
                 if (currentWaveCount == totalWaveCount) {
+//                    画笔回到原来的状态
                     x = 0;
                     y = 0;
                     befRect.set(0, 0, 0, 0);
                     aftRect.set(0, 0, 0, 0);
                     mPath.reset();
-                    mPath.moveTo(0, caculatedY(125));
+//                    mPath.moveTo(0, caculatedY(125));
                     currentWaveCount = 0;
                 }
             } else {
