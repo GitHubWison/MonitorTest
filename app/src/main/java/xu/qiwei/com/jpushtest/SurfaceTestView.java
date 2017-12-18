@@ -34,7 +34,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private Canvas mCanvas;
     // 子线程标志位
     private boolean isDrawing;
-    private int drawCount = 0;
+    //    private int drawCount = 0;
     private Rect refreshRect = new Rect(0, 0, 0, 0);
     private Paint paint;
     private SurfaceTestHandler surfaceTestHandler;
@@ -125,7 +125,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         isDrawing = false;
     }
 
-    public void refreshWave(WaveFormBeanShell waveFormBeanShell ) {
+    public void refreshWave(WaveFormBeanShell waveFormBeanShell) {
         Message message = new Message();
         message.obj = waveFormBeanShell;
         surfaceTestHandler.sendMessage(message);
@@ -135,7 +135,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         try {
             mCanvas = mSurfaceHolder.lockCanvas();
             Paint befPaint = new Paint();
-            befPaint.setColor(drawCount == 0 ? Color.BLACK : Color.RED);
+            befPaint.setColor(Color.BLACK);
             Paint aftPaint = new Paint();
             aftPaint.setColor(Color.BLACK);
             befRect.set(0, 0, x, getHeight());
@@ -164,51 +164,47 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Log.e("running==","running=====");
             WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell) msg.obj;
-            List<WaveFormBean> list =waveFormBeanShell.getWaveFormBeanList();
-            Log.e("name==size",waveFormBeanShell.getWaveProperty()+"=="+list.size());
+            List<WaveFormBean> list = waveFormBeanShell.getWaveFormBeanList();
             int count = 0;
             float viewWidth = getWidth();
             float widthSpace = viewWidth / (list.size() * totalWaveCount);
-            while (count <= (list.size() - 1)) {
-
-                WaveFormBean temp = list.get(count);
-                drawing();
-                x = count * widthSpace + currentWaveCount * list.size() * widthSpace;
-//                x=x+widthSpace;
-                y = caculatedY(getWaveY(temp.getWy()));
-                if (count == 0 && currentWaveCount == 0) {
+//            只有当计算出单个ｘ大于０时才能开始绘制和计算信息
+            if ((widthSpace > 0) && (list.size() > 0)) {
+                while (count <= (list.size() - 1)) {
+                    WaveFormBean temp = list.get(count);
+                    x = count * widthSpace + currentWaveCount * list.size() * widthSpace;
+                    y = caculatedY(getWaveY(temp.getWy()));
+                    if (count == 0 && currentWaveCount == 0) {
 //                    初始值
-                    mPath.moveTo(x, y);
+                        mPath.moveTo(x, y);
+                    }
+                    mPath.lineTo(x, y);
+                    drawing();
+                    count++;
                 }
-                mPath.lineTo(x, y);
-                count++;
+                currentWaveCount++;
+                if (currentWaveCount == totalWaveCount) {
+                    x = 0;
+                    y = 0;
+                    befRect.set(0, 0, 0, 0);
+                    aftRect.set(0, 0, 0, 0);
+                    mPath.reset();
+                    mPath.moveTo(0, caculatedY(125));
+                    currentWaveCount = 0;
+                }
+            } else {
+//防止循环过于频繁暂停１秒
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             if (waveDrawFinishCallBack != null) {
-                if (list.size() == 0){
-//                    禁止频繁绘制size=0的图案
-                    try {
-                        Thread.sleep(1000L);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
                 waveDrawFinishCallBack.onDrawWaveFinish();
             }
-            currentWaveCount++;
-
-            if (currentWaveCount == totalWaveCount) {
-//                初始化绘制数据
-                x = 0;
-                y = 0;
-                befRect.set(0, 0, 0, 0);
-                aftRect.set(0, 0, 0, 0);
-                mPath.reset();
-                mPath.moveTo(0, caculatedY(125));
-                currentWaveCount = 0;
-            }
-
         }
     }
 
