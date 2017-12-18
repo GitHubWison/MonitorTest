@@ -250,23 +250,23 @@ public class DrawPathTestActivity extends Activity {
     private void refreshWaveData(int waveFlag) {
         switch (waveFlag) {
             case 15:
-                surfacetest_view_15.refreshWave(waveDataHelper.getStoredWave_15().getWaveFormBeanList());
+                surfacetest_view_15.refreshWave(waveDataHelper.getStoredWave_15());
                 break;
-            case 54:
-                surfacetest_view_54.refreshWave(waveDataHelper.getStoredWave_54().getWaveFormBeanList());
-
-                break;
-            case 55:
-                surfacetest_view_55.refreshWave(waveDataHelper.getStoredWave_55().getWaveFormBeanList());
-                break;
-            case 80:
-                surfacetest_view_80.refreshWave(waveDataHelper.getStoredWave_80().getWaveFormBeanList());
-                break;
+//            case 54:
+//                surfacetest_view_54.refreshWave(waveDataHelper.getStoredWave_54());
+//
+//                break;
+//            case 55:
+//                surfacetest_view_55.refreshWave(waveDataHelper.getStoredWave_55());
+//                break;
+//            case 80:
+//                surfacetest_view_80.refreshWave(waveDataHelper.getStoredWave_80());
+//                break;
             case 1:
-                surfacetest_view_01.refreshWave(waveDataHelper.getStoredWave_01().getWaveFormBeanList());
+                surfacetest_view_01.refreshWave(waveDataHelper.getStoredWave_01());
                 break;
             case 2:
-                surfacetest_view_02.refreshWave(waveDataHelper.getStoredWave_02().getWaveFormBeanList());
+                surfacetest_view_02.refreshWave(waveDataHelper.getStoredWave_02());
                 break;
             default:
                 break;

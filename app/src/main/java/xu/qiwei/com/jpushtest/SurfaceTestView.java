@@ -13,12 +13,14 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.List;
 
 import xu.qiwei.com.jpushtest.beans.WaveFormBean;
+import xu.qiwei.com.jpushtest.beans.WaveFormBeanShell;
 import xu.qiwei.com.jpushtest.interfaces.WaveDrawFinishCallBack;
 
 /**
@@ -33,24 +35,24 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     // 子线程标志位
     private boolean isDrawing;
     private int drawCount = 0;
-    private Rect refreshRect = new Rect(0,0,0,0);
+    private Rect refreshRect = new Rect(0, 0, 0, 0);
     private Paint paint;
     private SurfaceTestHandler surfaceTestHandler;
     private Path mPath = new Path();
     private float x;
-    private float y ;
-    private  float BASELINE = -1;
-    private  float MULTIPLE_TIMES = -1;
+    private float y;
+    private float BASELINE = -1;
+    private float MULTIPLE_TIMES = -1;
     private static final int REFRESH_HEADER_WIDTH = 15;
-    private RectF befRect = new RectF(0,0,0,0);
-    private RectF aftRect = new RectF(0,0,0,0);
+    private RectF befRect = new RectF(0, 0, 0, 0);
+    private RectF aftRect = new RectF(0, 0, 0, 0);
     private static final int FLAT_WAVE = 50;
     private WaveDrawFinishCallBack waveDrawFinishCallBack;
 //    目前放置了多少个波形
 
-    int currentWaveCount =0;
-//    在这个控件中一共需要放置的波形数量
-    private int totalWaveCount =3;
+    int currentWaveCount = 0;
+    //    在这个控件中一共需要放置的波形数量
+    private int totalWaveCount = 3;
 
     public void setTotalWaveCount(int totalWaveCount) {
         this.totalWaveCount = totalWaveCount;
@@ -98,18 +100,18 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         isDrawing = true;
 //        new Thread(this).start();
         //        波形y值在200到(200-FLAT_WAVE)之间
-        if(MULTIPLE_TIMES<0){
-            MULTIPLE_TIMES = (getHeight())/(2*(Math.abs(200-FLAT_WAVE))) +1;
+        if (MULTIPLE_TIMES < 0) {
+            MULTIPLE_TIMES = (getHeight()) / (2 * (Math.abs(200 - FLAT_WAVE))) + 1;
         }
-        if (BASELINE<0){
-            BASELINE = getHeight()/2+FLAT_WAVE*MULTIPLE_TIMES;
+        if (BASELINE < 0) {
+            BASELINE = getHeight() / 2 + FLAT_WAVE * MULTIPLE_TIMES;
         }
 
 //
 //        MULTIPLE_TIMES =1;
 //        BASELINE = 1000;
         mPath.reset();
-        mPath.moveTo(0,caculatedY(125));
+        mPath.moveTo(0, caculatedY(125));
 
     }
 
@@ -122,9 +124,10 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     public void surfaceDestroyed(SurfaceHolder holder) {
         isDrawing = false;
     }
-    public void refreshWave(List<WaveFormBean> list){
+
+    public void refreshWave(WaveFormBeanShell waveFormBeanShell ) {
         Message message = new Message();
-        message.obj = list;
+        message.obj = waveFormBeanShell;
         surfaceTestHandler.sendMessage(message);
     }
 
@@ -132,28 +135,27 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         try {
             mCanvas = mSurfaceHolder.lockCanvas();
             Paint befPaint = new Paint();
-            befPaint.setColor(drawCount==0?Color.BLACK:Color.RED);
+            befPaint.setColor(drawCount == 0 ? Color.BLACK : Color.RED);
             Paint aftPaint = new Paint();
             aftPaint.setColor(Color.BLACK);
-            befRect.set(0,0,x,getHeight());
-            if (mCanvas==null) {
+            befRect.set(0, 0, x, getHeight());
+            if (mCanvas == null) {
                 return;
             }
-            mCanvas.drawRect(befRect,befPaint);
+            mCanvas.drawRect(befRect, befPaint);
 
-            mCanvas.drawPath(mPath,paint);
-            aftRect.set(x+REFRESH_HEADER_WIDTH,0,x+2*REFRESH_HEADER_WIDTH,getHeight());
-            mCanvas.drawRect(aftRect,aftPaint);
-        }finally {
-            if (mCanvas != null){
+            mCanvas.drawPath(mPath, paint);
+            aftRect.set(x + REFRESH_HEADER_WIDTH, 0, x + 2 * REFRESH_HEADER_WIDTH, getHeight());
+            mCanvas.drawRect(aftRect, aftPaint);
+        } finally {
+            if (mCanvas != null) {
                 mSurfaceHolder.unlockCanvasAndPost(mCanvas);
             }
         }
     }
 
 
-
-    private class  SurfaceTestHandler extends Handler{
+    private class SurfaceTestHandler extends Handler {
         public SurfaceTestHandler(Looper looper) {
             super(looper);
         }
@@ -162,53 +164,62 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            List<WaveFormBean> list = (List<WaveFormBean>)msg.obj;
-            if (list.size()==0) {
-                return;
-            }
-            int count =0;
+            WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell) msg.obj;
+            List<WaveFormBean> list =waveFormBeanShell.getWaveFormBeanList();
+            Log.e("name==size",waveFormBeanShell.getWaveProperty()+"=="+list.size());
+            int count = 0;
             float viewWidth = getWidth();
-
-
-            float widthSpace = viewWidth/(list.size()*totalWaveCount);
-            while (count<=(list.size()-1))
-            {
+            float widthSpace = viewWidth / (list.size() * totalWaveCount);
+            while (count <= (list.size() - 1)) {
 
                 WaveFormBean temp = list.get(count);
                 drawing();
-                x=count*widthSpace+currentWaveCount*list.size()*widthSpace;
+                x = count * widthSpace + currentWaveCount * list.size() * widthSpace;
 //                x=x+widthSpace;
                 y = caculatedY(getWaveY(temp.getWy()));
-                if (count==0&&currentWaveCount==0) {
+                if (count == 0 && currentWaveCount == 0) {
 //                    初始值
-                    mPath.moveTo(x,y);
+                    mPath.moveTo(x, y);
                 }
-                mPath.lineTo(x,y);
+                mPath.lineTo(x, y);
                 count++;
             }
-            if (waveDrawFinishCallBack!=null) {
+            if (waveDrawFinishCallBack != null) {
+                if (list.size() == 0){
+//                    禁止频繁绘制size=0的图案
+                    try {
+                        Thread.sleep(1000L);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 waveDrawFinishCallBack.onDrawWaveFinish();
             }
             currentWaveCount++;
-            if (currentWaveCount==totalWaveCount) {
-                x=0;
-                y=0;
-                befRect.set(0,0,0,0);
-                aftRect.set(0,0,0,0);
+
+            if (currentWaveCount == totalWaveCount) {
+//                初始化绘制数据
+                x = 0;
+                y = 0;
+                befRect.set(0, 0, 0, 0);
+                aftRect.set(0, 0, 0, 0);
                 mPath.reset();
-                mPath.moveTo(0,caculatedY(125));
-                currentWaveCount=0;
+                mPath.moveTo(0, caculatedY(125));
+                currentWaveCount = 0;
             }
+
         }
     }
 
-    private int caculatedY(int wavey){
-        int result = (int)(BASELINE - wavey* MULTIPLE_TIMES);
+    private int caculatedY(int wavey) {
+        int result = (int) (BASELINE - wavey * MULTIPLE_TIMES);
         return result;
     }
+
     private int getWaveY(byte originaly) {
 
-        return Utils.bytesToInt(new byte[]{ originaly, 0, 0, 0}, 0);
+        return Utils.bytesToInt(new byte[]{originaly, 0, 0, 0}, 0);
     }
 
 

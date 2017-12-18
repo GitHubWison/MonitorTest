@@ -20,17 +20,20 @@
             android:id="@+id/surfacetest_view_54"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:layout_weight="1" />
 
         <xu.qiwei.com.jpushtest.SurfaceTestView
             android:id="@+id/surfacetest_view_55"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:layout_weight="1" />
         <xu.qiwei.com.jpushtest.SurfaceTestView
             android:id="@+id/surfacetest_view_80"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             android:layout_weight="1" />
         <xu.qiwei.com.jpushtest.SurfaceTestView
             android:id="@+id/surfacetest_view_01"

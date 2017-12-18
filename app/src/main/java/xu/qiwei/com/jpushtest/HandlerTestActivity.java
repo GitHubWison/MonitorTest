@@ -25,8 +25,14 @@ public class HandlerTestActivity extends AppCompatActivity {
     private SendPatientListHandler sendPatientListHandler;
     private SandWaveHandler sandWaveHandler;
     private ReceiveWaveHandler receiveWaveHandler;
+//    用户信息
     private DatagramSocket listSocket;
+//    波形和spo2等数据
     private DatagramSocket waveSocket;
+//    心跳检测
+    private DatagramSocket heartBeatSocket;
+
+    private static final int TIME_OUT = 8000;
 
 
     @Override
@@ -44,6 +50,10 @@ public class HandlerTestActivity extends AppCompatActivity {
         try {
             listSocket = new DatagramSocket(3243);
             waveSocket = new DatagramSocket(7192);
+            heartBeatSocket = new DatagramSocket(3242);
+            heartBeatSocket.setSoTimeout(TIME_OUT);
+            waveSocket.setSoTimeout(TIME_OUT);
+            listSocket.setSoTimeout(TIME_OUT);
 
             HandlerThread myHandlerThread = new HandlerThread("handler_patient_list_thread");
             myHandlerThread.start();
