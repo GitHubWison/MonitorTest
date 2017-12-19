@@ -47,14 +47,12 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private RectF aftRect = new RectF(0, 0, 0, 0);
     private static final int FLAT_WAVE = 50;
     private WaveDrawFinishCallBack waveDrawFinishCallBack;
-//    这个控件容纳正常波形的高度
-    private float viewWaveHeight;
 //    倍率
     private float yRate;
 //偏移量
     private float yOffset;
-//    容错率
-    private static final float FAULT_TOLERANT=1f/4f;
+//    容错率(必须<1/2)
+    private static final float FAULT_TOLERANT=1f/3f;
 
 //    波形正常最大值
     private int maxY = 0;
@@ -131,7 +129,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             maxY = 200;
         }
         float  h =(float) getHeight();
-        yOffset = (h)/6f;
+        yOffset = (h)*FAULT_TOLERANT;
         yRate = (h*(1f-FAULT_TOLERANT*2))/(maxY - minY);
 
 //        new Thread(this).start();
@@ -147,7 +145,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
 //        MULTIPLE_TIMES =1;
 //        BASELINE = 1000;
         mPath.reset();
-        mPath.moveTo(0, caculatedY(125));
+//        mPath.moveTo(0, caculatedY(125));
 
     }
 
