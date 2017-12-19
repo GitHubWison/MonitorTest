@@ -40,14 +40,43 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private Path mPath = new Path();
     private float x;
     private float y;
-    private float BASELINE = -1;
-    private float MULTIPLE_TIMES = -1;
+//    private float BASELINE = -1;
+//    private float MULTIPLE_TIMES = -1;
     private static final int REFRESH_HEADER_WIDTH = 15;
     private RectF befRect = new RectF(0, 0, 0, 0);
     private RectF aftRect = new RectF(0, 0, 0, 0);
     private static final int FLAT_WAVE = 50;
     private WaveDrawFinishCallBack waveDrawFinishCallBack;
-//    目前放置了多少个波形
+//    这个控件容纳正常波形的高度
+    private float viewWaveHeight;
+//    倍率
+    private float yRate;
+//偏移量
+    private float yOffset;
+//    容错率
+    private static final float FAULT_TOLERANT=1f/4f;
+
+//    波形正常最大值
+    private int maxY = 0;
+//    波形正常最小值
+    private int minY = 0;
+
+    public int getMaxY() {
+        return maxY;
+    }
+
+    public void setMaxY(int maxY) {
+        this.maxY = maxY;
+    }
+
+    public int getMinY() {
+        return minY;
+    }
+
+    public void setMinY(int minY) {
+        this.minY = minY;
+    }
+    //    目前放置了多少个波形
 
     int currentWaveCount = 0;
     //    在这个控件中一共需要放置的波形数量
@@ -57,13 +86,13 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         this.totalWaveCount = totalWaveCount;
     }
 
-    public void setMULTIPLE_TIMES(float MULTIPLE_TIMES) {
-        this.MULTIPLE_TIMES = MULTIPLE_TIMES;
-    }
-
-    public void setBASELINE(float BASELINE) {
-        this.BASELINE = BASELINE;
-    }
+//    public void setMULTIPLE_TIMES(float MULTIPLE_TIMES) {
+//        this.MULTIPLE_TIMES = MULTIPLE_TIMES;
+//    }
+//
+//    public void setBASELINE(float BASELINE) {
+//        this.BASELINE = BASELINE;
+//    }
 
     private Bitmap bitmap;
 
@@ -97,14 +126,21 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         isDrawing = true;
+        if (maxY==0) {
+            maxY = 200;
+        }
+        float  h =(float) getHeight();
+        yOffset = (h)/6f;
+        yRate = (h*(1f-FAULT_TOLERANT*2))/(maxY - minY);
+
 //        new Thread(this).start();
         //        波形y值在200到(200-FLAT_WAVE)之间
-        if (MULTIPLE_TIMES < 0) {
-            MULTIPLE_TIMES = (getHeight()) / (2 * (Math.abs(200 - FLAT_WAVE))) + 1;
-        }
-        if (BASELINE < 0) {
-            BASELINE = getHeight() / 2 + FLAT_WAVE * MULTIPLE_TIMES;
-        }
+//        if (MULTIPLE_TIMES < 0) {
+//            MULTIPLE_TIMES = (getHeight()) / (2 * (Math.abs(200 - FLAT_WAVE))) + 1;
+//        }
+//        if (BASELINE < 0) {
+//            BASELINE = getHeight() / 2 + FLAT_WAVE * MULTIPLE_TIMES;
+//        }
 
 //
 //        MULTIPLE_TIMES =1;
@@ -207,8 +243,10 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         }
     }
 
-    private int caculatedY(int wavey) {
-        int result = (int) (BASELINE - wavey * MULTIPLE_TIMES);
+//    wavey:１６位转１０位后的数字
+    private float caculatedY(int wavey) {
+//        int result = (int) (BASELINE - wavey * MULTIPLE_TIMES);
+        float result = ((float)(maxY-wavey))*yRate+yOffset;
         return result;
     }
 

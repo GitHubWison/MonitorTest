@@ -61,4 +61,9 @@
         android:text="40sp"
         android:id="@+id/cacular_button"
         />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="cacularYTest"
+        />
 </LinearLayout>

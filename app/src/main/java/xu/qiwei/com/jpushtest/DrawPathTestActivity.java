@@ -146,52 +146,13 @@ public class DrawPathTestActivity extends Activity {
                 Log.e("更新数据代号", randomInt + "");
                 byte[] monitorBytes = SIMULATIONMONITORDATA.get(randomInt);
                 waveDataHelper.saveOrUpdateWaveInfo(monitorBytes);
-                hr_textview.post(new Runnable() {
+                runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         hr_textview.setText(randomInt+"");
-//waveDataHelper.getStoredHR()
+                        refreshOtherDatas();
                     }
                 });
-                pvc_textview.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        pvc_textview.setText(waveDataHelper.getStoredPvc());
-                    }
-                });
-                spo2_textview.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        spo2_textview.setText(waveDataHelper.getStoredSpo2());
-                    }
-                });
-                pr_textview.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        pr_textview.setText(waveDataHelper.getStoredPR());
-                    }
-                });
-                nibp_textview.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        nibp_textview.setText(waveDataHelper.getStoredNibp());
-                    }
-                });
-                resp_textview.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        resp_textview.setText(waveDataHelper.getStoredResp());
-                    }
-                });
-
-                time_button.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        time_button.setText(waveDataHelper.getTime());
-                    }
-                });
-
-
                 Log.e("get_monitor_data", "" + Thread.currentThread().getName());
                 try {
                     Thread.sleep(3000);
@@ -237,6 +198,15 @@ public class DrawPathTestActivity extends Activity {
         surfacetest_view_15.setTotalWaveCount(8);
         surfacetest_view_01.setTotalWaveCount(16);
         surfacetest_view_02.setTotalWaveCount(16);
+        surfacetest_view_15.setMaxY(160);
+        surfacetest_view_15.setMinY(120);
+
+        surfacetest_view_01.setMaxY(143);
+        surfacetest_view_01.setMinY(113);
+
+        surfacetest_view_02.setMaxY(90);
+        surfacetest_view_02.setMinY(0);
+
     }
 
 
@@ -251,12 +221,14 @@ public class DrawPathTestActivity extends Activity {
 
     //    刷新其他信息的方法
     private void refreshOtherDatas() {
-        hr_textview.setText(waveDataHelper.getStoredHR());
+
+//waveDataHelper.getStoredHR()
         pvc_textview.setText(waveDataHelper.getStoredPvc());
         spo2_textview.setText(waveDataHelper.getStoredSpo2());
         pr_textview.setText(waveDataHelper.getStoredPR());
         nibp_textview.setText(waveDataHelper.getStoredNibp());
         resp_textview.setText(waveDataHelper.getStoredResp());
+        time_button.setText(waveDataHelper.getTime());
 
     }
 
