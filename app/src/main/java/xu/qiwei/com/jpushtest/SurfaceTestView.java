@@ -115,6 +115,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         paint = new Paint();
         paint.setColor(Color.YELLOW);
         paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(3);
         HandlerThread handlerThread = new HandlerThread("uppp-ui");
         handlerThread.start();
         surfaceTestHandler = new SurfaceTestHandler(handlerThread.getLooper());

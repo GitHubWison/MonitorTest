@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -143,7 +142,7 @@ public class DrawPathTestActivity extends Activity {
             while (isdownloadMonitorData) {
                 //     //        模拟监护仪返回的数据
                 final int randomInt = (int) (Math.random() * 4);
-                Log.e("更新数据代号", randomInt + "");
+//                Log.e("更新数据代号", randomInt + "");
                 byte[] monitorBytes = SIMULATIONMONITORDATA.get(randomInt);
                 waveDataHelper.saveOrUpdateWaveInfo(monitorBytes);
                 runOnUiThread(new Runnable() {
@@ -153,7 +152,7 @@ public class DrawPathTestActivity extends Activity {
                         refreshOtherDatas();
                     }
                 });
-                Log.e("get_monitor_data", "" + Thread.currentThread().getName());
+//                Log.e("get_monitor_data", "" + Thread.currentThread().getName());
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
@@ -195,9 +194,9 @@ public class DrawPathTestActivity extends Activity {
         surfacetest_view_01 = (SurfaceTestView) findViewById(R.id.surfacetest_view_01);
         surfacetest_view_02 = (SurfaceTestView) findViewById(R.id.surfacetest_view_02);
 
-        surfacetest_view_15.setTotalWaveCount(8);
-        surfacetest_view_01.setTotalWaveCount(16);
-        surfacetest_view_02.setTotalWaveCount(16);
+        surfacetest_view_15.setTotalWaveCount(5);
+        surfacetest_view_01.setTotalWaveCount(8);
+        surfacetest_view_02.setTotalWaveCount(8);
         surfacetest_view_15.setMaxY(160);
         surfacetest_view_15.setMinY(120);
 
