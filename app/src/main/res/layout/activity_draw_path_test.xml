@@ -11,7 +11,13 @@
         android:orientation="vertical">
 <!--TODO:需要根据第１６位的具体值分配ｖｉｅｗ-->
         <xu.qiwei.com.jpushtest.SurfaceTestView
-            android:id="@+id/surfacetest_view_15"
+            android:id="@+id/surfacetest_view_101"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <xu.qiwei.com.jpushtest.SurfaceTestView
+            android:id="@+id/surfacetest_view_102"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />

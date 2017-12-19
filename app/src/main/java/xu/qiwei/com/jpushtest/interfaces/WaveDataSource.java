@@ -41,8 +41,7 @@ public interface WaveDataSource {
     public WaveFormBeanShell getStoredWave_80();
     public WaveFormBeanShell getStoredWave_01();
     public WaveFormBeanShell getStoredWave_02();
-    public WaveFormBeanShell getStoredWave_15();
-
+    public WaveFormBeanShell getStoredWave_15(String waveID);
 
 
 }

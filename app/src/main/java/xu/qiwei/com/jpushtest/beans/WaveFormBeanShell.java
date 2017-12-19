@@ -11,11 +11,22 @@ public class WaveFormBeanShell {
     private int length ;
     private String waveProperty;
     private List<WaveFormBean> waveFormBeanList;
+//    102,118,等
+    private String waveID;
 
     public WaveFormBeanShell() {
         this.length = 0;
         this.waveProperty = "";
         this.waveFormBeanList = new ArrayList<>();
+        this.waveID = "";
+    }
+
+    public String getWaveID() {
+        return waveID;
+    }
+
+    public void setWaveID(String waveID) {
+        this.waveID = waveID;
     }
 
     public int getLength() {

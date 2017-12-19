@@ -86,7 +86,7 @@ public class WaveDataHelper implements WaveDataSource {
                 saveWave_54(temp.getWave_54());
                 saveWave_55(temp.getWave_55());
                 saveWave_80(temp.getWave_80());
-
+                break;
             case 118:
 //                   更新resp/心电图
                 saveResp(temp.getResp());
@@ -147,7 +147,8 @@ public class WaveDataHelper implements WaveDataSource {
 
     @Override
     public void saveWave_15(WaveFormBeanShell waveFormBeanShell) {
-        SharedPrefsUtils.setObjectPreference(CommonApplication.context, WAVE_15_KEY, waveFormBeanShell);
+        String id = spellWaveKey(waveFormBeanShell.getWaveID());
+        SharedPrefsUtils.setObjectPreference(CommonApplication.context, id, waveFormBeanShell);
     }
 
     @Override
@@ -179,6 +180,12 @@ public class WaveDataHelper implements WaveDataSource {
         SharedPrefsUtils.setObjectPreference(CommonApplication.context, WAVE_02_KEY, waveFormBeanShell);
 
     }
+
+//    @Override
+//    public void saveWave_102(WaveFormBeanShell waveFormBeanShell) {
+////        WAVE_102_KEY
+//        SharedPrefsUtils.setObjectPreference(CommonApplication.context, WAVE_102_KEY, waveFormBeanShell);
+//    }
 
     @Override
     public String getStoredHR() {
@@ -295,13 +302,32 @@ public class WaveDataHelper implements WaveDataSource {
     }
 
     @Override
-    public WaveFormBeanShell getStoredWave_15() {
+    public WaveFormBeanShell getStoredWave_15(String waveID) {
+        String id = spellWaveKey(waveID);
         WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell) SharedPrefsUtils.getObjectPreference(CommonApplication.context,
-                WAVE_15_KEY, WaveFormBeanShell.class);
+                id  , WaveFormBeanShell.class);
         if (waveFormBeanShell == null) {
             waveFormBeanShell = new WaveFormBeanShell();
         }
         return waveFormBeanShell;
+    }
+
+//    @Override
+//    public WaveFormBeanShell getStoredWave_102() {
+//        WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell) SharedPrefsUtils.getObjectPreference(CommonApplication.context,
+//                WAVE_102_KEY, WaveFormBeanShell.class);
+//        if (waveFormBeanShell == null) {
+//            waveFormBeanShell = new WaveFormBeanShell();
+//        }
+//        return waveFormBeanShell;
+//    }
+    private String spellWaveKey(String waveID){
+        if (waveID==null||"null".equals(waveID)) {
+            waveID = "";
+        }
+        StringBuffer stringBuffer  = new StringBuffer();
+        stringBuffer.append(WAVE_15_KEY).append("_").append(waveID);
+        return stringBuffer.toString();
     }
 
 }

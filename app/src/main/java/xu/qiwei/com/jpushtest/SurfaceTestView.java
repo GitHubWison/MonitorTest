@@ -45,7 +45,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private static final int REFRESH_HEADER_WIDTH = 15;
     private RectF befRect = new RectF(0, 0, 0, 0);
     private RectF aftRect = new RectF(0, 0, 0, 0);
-    private static final int FLAT_WAVE = 50;
+//    private static final int FLAT_WAVE = 50;
     private WaveDrawFinishCallBack waveDrawFinishCallBack;
 //    倍率
     private float yRate;
@@ -125,6 +125,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         isDrawing = true;
+//        FAULT_TOLERANT = FAULT_TOLERANT>(1/2f)?(1/3f):(FAULT_TOLERANT);
         if (maxY==0) {
             maxY = 200;
         }

@@ -17,9 +17,12 @@ import static xu.qiwei.com.jpushtest.Utils.bytesToInt;
  */
 
 public class MonitorBean {
+    public static final String WAVE_ID_102 = "102";
+    public static final String WAVE_ID_101 = "101";
     //    波形
 //    private List<WaveFormBeanShell> waveFormBeanShell ;
     private WaveFormBeanShell wave_15;
+    private WaveFormBeanShell wave_102;
     private WaveFormBeanShell wave_54;
     private WaveFormBeanShell wave_55;
     private WaveFormBeanShell wave_80;
@@ -125,7 +128,7 @@ public class MonitorBean {
 
     private WaveFormBeanShell getWaveDatas(byte[] bytes, int lengthStart, int lengthEnd, int waveDataStart, int wavePropertyPosition) {
         WaveFormBeanShell waveFormBeanShell = new WaveFormBeanShell();
-
+        waveFormBeanShell.setWaveID(Utils.bytesToInt(new byte[]{bytes[15],0,0,0},0)+"");
         int length = Utils.bytesToInt(new byte[]{bytes[lengthStart], bytes[lengthEnd], 0, 0}, 0);
         String waveProperty = cacularWaveProperty(bytes, wavePropertyPosition);
         byte[] temp = rangeByte(waveDataStart, length, bytes);
@@ -324,6 +327,14 @@ public class MonitorBean {
                 return "V6";
         }
         return "";
+    }
+
+    public WaveFormBeanShell getWave_102() {
+        return wave_102;
+    }
+
+    public void setWave_102(WaveFormBeanShell wave_102) {
+        this.wave_102 = wave_102;
     }
 
     public WaveFormBeanShell getWave_15() {

@@ -43,24 +43,24 @@ public class MainActivity extends AppCompatActivity {
         int maxy = 0;
         int miny = 999;
         StringBuffer sb = new StringBuffer();
-        for (byte b : temp) {
+        for (byte b : TESTBYTE_119) {
             int yy = getWaveY(b);
-            maxy = yy>maxy?yy:maxy;
-            miny = yy<miny?yy:miny;
-//            sb.append(getWaveY(b)+",");
+//            maxy = yy>maxy?yy:maxy;
+//            miny = yy<miny?yy:miny;
+            sb.append(getWaveY(b)+",");
         }
-        float h = 1600f;
-        float d = (h*((float)2/3))/((float)maxy-(float)miny);
-        float b =h/6f;
-
-        for (byte bytey : temp) {
-            int yy = getWaveY(bytey);
-            float fy = (maxy-yy)*d+b;
-            sb.append("("+fy+","+yy+")");
-        }
+//        float h = 1600f;
+//        float d = (h*((float)2/3))/((float)maxy-(float)miny);
+//        float b =h/6f;
+//
+//        for (byte bytey : temp) {
+//            int yy = getWaveY(bytey);
+//            float fy = (maxy-yy)*d+b;
+//            sb.append("("+fy+","+yy+")");
+//        }
         Log.e("ssssssss",sb.toString()+"xx");
-        Log.e("ssssssss_maxy",maxy+"xx");
-        Log.e("ssssssss_miny",miny+"xx");
+//        Log.e("ssssssss_maxy",maxy+"xx");
+//        Log.e("ssssssss_miny",miny+"xx");
     }
 //    dy = maxy-y
 //    private float caculateY(float dy){
