@@ -15,6 +15,7 @@ import java.util.List;
 import xu.qiwei.com.jpushtest.beans.MonitorBean;
 import xu.qiwei.com.jpushtest.beans.WaveFormBeanShell;
 import xu.qiwei.com.jpushtest.interfaces.WaveDrawFinishCallBack;
+import xu.qiwei.com.jpushtest.views.TextViewWithoutPadding;
 
 
 public class DrawPathTestActivity extends Activity {
@@ -225,11 +226,11 @@ public class DrawPathTestActivity extends Activity {
         pr_paramdata = (LinearLayout) findViewById(R.id.pr_paramdata);
         resp_paramdata = (LinearLayout) findViewById(R.id.resp_paramdata);
 
-        TextView hr_paramtitle_textview = (TextView) hr_paramdata.findViewById(R.id.paramtitle_textview);
-        TextView nibp_paramdtitle_textview = (TextView) nibp_paramdata.findViewById(R.id.paramtitle_textview);
-        TextView po2_paramtitle_textview = (TextView) spo2_paramdata.findViewById(R.id.paramtitle_textview);
-        TextView pr_paramtitle_textview = (TextView) pr_paramdata.findViewById(R.id.paramtitle_textview);
-        TextView resp_paramtitle_textview = (TextView) resp_paramdata.findViewById(R.id.paramtitle_textview);
+        TextViewWithoutPadding hr_paramtitle_textview = (TextViewWithoutPadding) hr_paramdata.findViewById(R.id.paramtitle_textview);
+        TextViewWithoutPadding nibp_paramdtitle_textview = (TextViewWithoutPadding) nibp_paramdata.findViewById(R.id.paramtitle_textview);
+        TextViewWithoutPadding po2_paramtitle_textview = (TextViewWithoutPadding) spo2_paramdata.findViewById(R.id.paramtitle_textview);
+        TextViewWithoutPadding pr_paramtitle_textview = (TextViewWithoutPadding) pr_paramdata.findViewById(R.id.paramtitle_textview);
+        TextViewWithoutPadding resp_paramtitle_textview = (TextViewWithoutPadding) resp_paramdata.findViewById(R.id.paramtitle_textview);
 
          hr_paramvalue_textview = (TextView) hr_paramdata.findViewById(R.id.paramvalue_textview);
          nibp_paramvalue_textview = (TextView) nibp_paramdata.findViewById(R.id.paramvalue_textview);
