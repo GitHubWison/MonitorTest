@@ -241,13 +241,13 @@ public class DrawPathTestActivity extends Activity {
         hr_paramtitle_textview.setTextColor(0xFF00FF00);
         nibp_paramdtitle_textview.setTextColor(0xFFFFFFFF);
         po2_paramtitle_textview.setTextColor(0xFF00FFFF);
-        pr_paramtitle_textview.setTextColor(0xFFFFFFFF);
+        pr_paramtitle_textview.setTextColor(0xFF00FFFF);
         resp_paramtitle_textview.setTextColor(0xFFFFFF00);
 
         hr_paramvalue_textview.setTextColor(0xFF00FF00);
         nibp_paramvalue_textview.setTextColor(0xFFFFFFFF);
         po2_paramvalue_textview.setTextColor(0xFF00FFFF);
-        pr_paramvalue_textview.setTextColor(0xFFFFFFFF);
+        pr_paramvalue_textview.setTextColor(0xFF00FFFF);
         resp_paramvalue_textview.setTextColor(0xFFFFFF00);
 
         hr_paramtitle_textview.setText("HR");
