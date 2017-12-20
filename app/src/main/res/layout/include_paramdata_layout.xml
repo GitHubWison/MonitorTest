@@ -13,16 +13,16 @@
         android:paddingLeft="@dimen/x8"
         android:id="@+id/paramtitle_textview"
         android:textSize="@dimen/x40"
-        android:background="@android:color/holo_red_dark"
+        android:background="@android:color/transparent"
         android:layout_gravity="left"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center|top"
+        android:layout_marginTop="-2dp"
         android:id="@+id/paramvalue_textview"
         android:layout_gravity="center"
-        android:background="@android:color/holo_orange_dark"
+        android:background="@android:color/transparent"
         android:textSize="@dimen/x72"/>
     <!--
         android:background="@android:color/holo_orange_dark"-->
