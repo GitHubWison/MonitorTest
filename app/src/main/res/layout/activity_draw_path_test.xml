@@ -2,20 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/black"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="@dimen/x1018"
         android:layout_height="match_parent"
-        android:layout_weight="4"
         android:orientation="vertical">
-<!--TODO:需要根据第１６位的具体值分配ｖｉｅｗ-->
+        <TextView
+            style="@style/WaveIDStyle"
+            android:id="@+id/id_101"
+            />
         <xu.qiwei.com.jpushtest.SurfaceTestView
             android:id="@+id/surfacetest_view_101"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
-
+        <TextView
+            style="@style/WaveIDStyle"
+            android:id="@+id/id_102"
+            />
         <xu.qiwei.com.jpushtest.SurfaceTestView
             android:id="@+id/surfacetest_view_102"
             android:layout_width="match_parent"
@@ -26,26 +32,35 @@
             android:id="@+id/surfacetest_view_54"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="gone" />
 
         <xu.qiwei.com.jpushtest.SurfaceTestView
             android:id="@+id/surfacetest_view_55"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="gone" />
+
         <xu.qiwei.com.jpushtest.SurfaceTestView
             android:id="@+id/surfacetest_view_80"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="gone" />
+        <TextView
+            style="@style/WaveIDStyle"
+            android:id="@+id/id_01"
+            />
         <xu.qiwei.com.jpushtest.SurfaceTestView
             android:id="@+id/surfacetest_view_01"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
+        <TextView
+            style="@style/WaveIDStyle"
+            android:id="@+id/id_02"
+            />
         <xu.qiwei.com.jpushtest.SurfaceTestView
             android:id="@+id/surfacetest_view_02"
             android:layout_width="match_parent"
@@ -53,44 +68,48 @@
             android:layout_weight="1" />
 
 
-
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="@dimen/x336"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:background="@android:color/white"
         android:orientation="vertical">
-        <Button
+        <TextView
+            android:id="@+id/time_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:id="@+id/time_button"
-            />
-        <TextView
+            android:background="@android:color/black"
+            android:textColor="@android:color/white"
+            android:gravity="center|left"
+            android:textSize="@dimen/x26" />
+
+        <include
+            android:id="@+id/hr_paramdata"
             style="@style/MonitorOtherDatas"
-            android:id="@+id/hr_textview"
-            />
-        <TextView
+            layout="@layout/include_paramdata_layout" />
+
+        <include
+            android:id="@+id/nibp_paramdata"
             style="@style/MonitorOtherDatas"
-            android:id="@+id/pvc_textview"
-            />
-        <TextView
+            layout="@layout/include_paramdata_layout" />
+
+        <include
+            android:id="@+id/spo2_paramdata"
             style="@style/MonitorOtherDatas"
-            android:id="@+id/spo2_textview"
-            />
-        <TextView
+            layout="@layout/include_paramdata_layout" />
+
+        <include
+            android:id="@+id/pr_paramdata"
             style="@style/MonitorOtherDatas"
-            android:id="@+id/pr_textview"
-            />
-        <TextView
+            layout="@layout/include_paramdata_layout" />
+
+        <include
+            android:id="@+id/resp_paramdata"
             style="@style/MonitorOtherDatas"
-            android:id="@+id/nibp_textview"
-            />
-        <TextView
-            style="@style/MonitorOtherDatas"
-            android:id="@+id/resp_textview"
-            />
+            layout="@layout/include_paramdata_layout" />
+
+
     </LinearLayout>
 
 

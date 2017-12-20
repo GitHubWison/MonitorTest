@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+
+    android:background="@android:color/black"
+    >
+    <!--参数相关的layout-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x8"
+        android:id="@+id/paramtitle_textview"
+        android:textSize="@dimen/x40"
+        android:background="@android:color/holo_red_dark"
+        android:layout_gravity="left"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:id="@+id/paramvalue_textview"
+        android:layout_gravity="center"
+        android:background="@android:color/holo_orange_dark"
+        android:textSize="@dimen/x72"/>
+    <!--
+        android:background="@android:color/holo_orange_dark"-->
+
+
+</LinearLayout>

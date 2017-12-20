@@ -248,6 +248,13 @@ public class WaveDataHelper implements WaveDataSource {
         if (temp == null || "null".equals(temp) || "".equals(temp)) {
             temp = "--";
         }
+/*        else
+        {
+//            将时间格式化
+            if (temp.contains(" ")) {
+                temp = temp.replace(" ","\n");
+            }
+        }*/
         return temp;
     }
 

@@ -6,20 +6,21 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import xu.qiwei.com.jpushtest.beans.MonitorBean;
+import xu.qiwei.com.jpushtest.beans.WaveFormBeanShell;
 import xu.qiwei.com.jpushtest.interfaces.WaveDrawFinishCallBack;
 
 
 public class DrawPathTestActivity extends Activity {
     boolean switchtag = false;
-//    101
-    private static final byte[]TESTBYTE_101 = new byte[]{11,-38,1,44,11,-65,0,0,-56,-12,-44,23,0,101,43,101,0,0,0,0,60,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,125,125,125,125,124,123,122,121,122,-126,-119,-111,-104,-97,-94,-101,-108,-116,-123,126,120,121,122,123,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,126,127,127,-127,-127,-126,-125,-124,-124,-123,-122,-121,-121,-121,-120,-120,-119,-119,-119,-118,-118,-118,-118,-119,-119,-120,-120,-121,-121,-123,-123,-123,-125,-126,-127,-127,127,126,126,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,126,126,127,-127,-127,-126,-126,-125,-125,-124,-124,-124,-125,-126,-126,-127,-127,127,127,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,28,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,};
+    //    101
+    private static final byte[] TESTBYTE_101 = new byte[]{11, -38, 1, 44, 11, -65, 0, 0, -56, -12, -44, 23, 0, 101, 43, 101, 0, 0, 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 125, 125, 125, 125, 124, 123, 122, 121, 122, -126, -119, -111, -104, -97, -94, -101, -108, -116, -123, 126, 120, 121, 122, 123, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 126, 127, 127, -127, -127, -126, -125, -124, -124, -123, -122, -121, -121, -121, -120, -120, -119, -119, -119, -118, -118, -118, -118, -119, -119, -120, -120, -121, -121, -123, -123, -123, -125, -126, -127, -127, 127, 126, 126, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 126, 126, 127, -127, -127, -126, -126, -125, -125, -124, -124, -124, -125, -126, -126, -127, -127, 127, 127, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 28, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,};
     //    102
     private static final byte[] TESTBYTE111 = new byte[]{11, -38, 1, 44, 11, -65, 0, 0, -45, -12, -44, 23, 0, 101, 43, 102, 0, 0, 0, 0, 60,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
@@ -34,7 +35,7 @@ public class DrawPathTestActivity extends Activity {
 
     private static final byte[] TESTBYTE_120 = new byte[]{11, -38, 0, 45, 21, -22, 0, 0, -45, -12, -44, 23, 0, 101, 43, 120, 0, 120, 0, 93, 0, 80, 0, -6, 0, 0, 0, -6, 0, 0, 0, -6, 0, 0, 0, 0, 74, -105, -96, 21, 94, 0, 0, 28, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,};
 
-    private static final byte[] TESTBYTE_102=new byte[]{11,-38,1,44,11,-65,0,0,-45,-12,-44,23,0,101,43,102,0,0,0,0,60,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,125,125,125,125,124,123,122,121,122,-126,-119,-111,-104,-97,-94,-101,-108,-116,-123,126,120,121,122,123,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,126,127,127,-127,-127,-126,-125,-124,-124,-123,-122,-121,-121,-121,-120,-120,-119,-119,-119,-118,-118,-118,-118,-119,-119,-120,-120,-121,-121,-123,-123,-123,-125,-126,-127,-127,127,126,126,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,126,126,127,-127,-127,-126,-126,-125,-125,-124,-124,-124,-125,-126,-126,-127,-127,127,127,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,125,28,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,};
+    private static final byte[] TESTBYTE_102 = new byte[]{11, -38, 1, 44, 11, -65, 0, 0, -45, -12, -44, 23, 0, 101, 43, 102, 0, 0, 0, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 125, 125, 125, 125, 124, 123, 122, 121, 122, -126, -119, -111, -104, -97, -94, -101, -108, -116, -123, 126, 120, 121, 122, 123, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 126, 127, 127, -127, -127, -126, -125, -124, -124, -123, -122, -121, -121, -121, -120, -120, -119, -119, -119, -118, -118, -118, -118, -119, -119, -120, -120, -121, -121, -123, -123, -123, -125, -126, -127, -127, 127, 126, 126, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 126, 126, 127, -127, -127, -126, -126, -125, -125, -124, -124, -124, -125, -126, -126, -127, -127, 127, 127, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 125, 28, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,};
 
 
     private static final List<byte[]> SIMULATIONMONITORDATA = new ArrayList<>();
@@ -48,15 +49,24 @@ public class DrawPathTestActivity extends Activity {
     private SurfaceTestView surfacetest_view_02;
     private SurfaceTestView surfacetest_view_102;
 
-    private TextView hr_textview;
-    private TextView pvc_textview;
-    private TextView spo2_textview;
-    private TextView pr_textview;
-    private TextView nibp_textview;
-    private TextView resp_textview;
+    private TextView time_textview;
+    private LinearLayout hr_paramdata;
+    private LinearLayout nibp_paramdata;
+    private LinearLayout spo2_paramdata;
+    private LinearLayout pr_paramdata;
+    private LinearLayout resp_paramdata;
 
-    private Button time_button;
+    TextView hr_paramvalue_textview ;
+    TextView nibp_paramvalue_textview ;
+    TextView po2_paramvalue_textview ;
+    TextView pr_paramvalue_textview ;
+    TextView resp_paramvalue_textview ;
 
+    private TextView id_101;
+    private TextView id_102;
+    private TextView id_01;
+    private TextView id_02;
+//    private TextView id_101;
 
 
     //    private TextView tztxt_textview;
@@ -161,7 +171,7 @@ public class DrawPathTestActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        hr_textview.setText(randomInt+"");
+//                        hr_textview.setText(randomInt + "");
                         refreshOtherDatas();
                     }
                 });
@@ -192,13 +202,58 @@ public class DrawPathTestActivity extends Activity {
     }
 
     private void initViews() {
-        time_button = (Button)findViewById(R.id.time_button);
-        hr_textview = (TextView) findViewById(R.id.hr_textview);
-        pvc_textview = (TextView) findViewById(R.id.pvc_textview);
-        spo2_textview = (TextView) findViewById(R.id.spo2_textview);
-        pr_textview = (TextView) findViewById(R.id.pr_textview);
-        nibp_textview = (TextView) findViewById(R.id.nibp_textview);
-        resp_textview = (TextView) findViewById(R.id.resp_textview);
+        time_textview = (TextView) findViewById(R.id.time_textview);
+
+        /*    private LinearLayout ;
+    private LinearLayout ;
+    private LinearLayout ;
+    private LinearLayout ;*/
+        /*    private TextView id_101;
+    private TextView id_102;
+    private TextView id_01;
+    private TextView id_02;
+    private TextView id_101;*/
+         id_101 = (TextView)findViewById(R.id.id_101) ;
+         id_102 = (TextView)findViewById(R.id.id_102) ;
+         id_01 = (TextView)findViewById(R.id.id_01) ;
+         id_02 = (TextView)findViewById(R.id.id_02) ;
+
+
+        hr_paramdata = (LinearLayout) findViewById(R.id.hr_paramdata);
+        nibp_paramdata = (LinearLayout) findViewById(R.id.nibp_paramdata);
+        spo2_paramdata = (LinearLayout) findViewById(R.id.spo2_paramdata);
+        pr_paramdata = (LinearLayout) findViewById(R.id.pr_paramdata);
+        resp_paramdata = (LinearLayout) findViewById(R.id.resp_paramdata);
+
+        TextView hr_paramtitle_textview = (TextView) hr_paramdata.findViewById(R.id.paramtitle_textview);
+        TextView nibp_paramdtitle_textview = (TextView) nibp_paramdata.findViewById(R.id.paramtitle_textview);
+        TextView po2_paramtitle_textview = (TextView) spo2_paramdata.findViewById(R.id.paramtitle_textview);
+        TextView pr_paramtitle_textview = (TextView) pr_paramdata.findViewById(R.id.paramtitle_textview);
+        TextView resp_paramtitle_textview = (TextView) resp_paramdata.findViewById(R.id.paramtitle_textview);
+
+         hr_paramvalue_textview = (TextView) hr_paramdata.findViewById(R.id.paramvalue_textview);
+         nibp_paramvalue_textview = (TextView) nibp_paramdata.findViewById(R.id.paramvalue_textview);
+         po2_paramvalue_textview = (TextView) spo2_paramdata.findViewById(R.id.paramvalue_textview);
+         pr_paramvalue_textview = (TextView) pr_paramdata.findViewById(R.id.paramvalue_textview);
+         resp_paramvalue_textview = (TextView) resp_paramdata.findViewById(R.id.paramvalue_textview);
+
+        hr_paramtitle_textview.setTextColor(0xFF00FF00);
+        nibp_paramdtitle_textview.setTextColor(0xFFFFFFFF);
+        po2_paramtitle_textview.setTextColor(0xFF00FFFF);
+        pr_paramtitle_textview.setTextColor(0xFFFFFFFF);
+        resp_paramtitle_textview.setTextColor(0xFFFFFF00);
+
+        hr_paramvalue_textview.setTextColor(0xFF00FF00);
+        nibp_paramvalue_textview.setTextColor(0xFFFFFFFF);
+        po2_paramvalue_textview.setTextColor(0xFF00FFFF);
+        pr_paramvalue_textview.setTextColor(0xFFFFFFFF);
+        resp_paramvalue_textview.setTextColor(0xFFFFFF00);
+
+        hr_paramtitle_textview.setText("HR");
+        nibp_paramdtitle_textview.setText("NIBP");
+        po2_paramtitle_textview.setText("SPO2");
+        pr_paramtitle_textview.setText("PR");
+        resp_paramtitle_textview.setText("RESP");
 
 
         surfacetest_view_101 = (SurfaceTestView) findViewById(R.id.surfacetest_view_101);
@@ -207,7 +262,7 @@ public class DrawPathTestActivity extends Activity {
         surfacetest_view_80 = (SurfaceTestView) findViewById(R.id.surfacetest_view_80);
         surfacetest_view_01 = (SurfaceTestView) findViewById(R.id.surfacetest_view_01);
         surfacetest_view_02 = (SurfaceTestView) findViewById(R.id.surfacetest_view_02);
-        surfacetest_view_102 = (SurfaceTestView)findViewById(R.id.surfacetest_view_102);
+        surfacetest_view_102 = (SurfaceTestView) findViewById(R.id.surfacetest_view_102);
 
         surfacetest_view_101.setTotalWaveCount(5);
         surfacetest_view_01.setTotalWaveCount(8);
@@ -216,6 +271,7 @@ public class DrawPathTestActivity extends Activity {
 
         surfacetest_view_101.setMaxY(160);
         surfacetest_view_101.setMinY(120);
+
         surfacetest_view_102.setMaxY(160);
         surfacetest_view_102.setMinY(120);
 
@@ -240,14 +296,14 @@ public class DrawPathTestActivity extends Activity {
 
     //    刷新其他信息的方法
     private void refreshOtherDatas() {
+        hr_paramvalue_textview.setText(waveDataHelper.getStoredHR());
+        nibp_paramvalue_textview.setText(waveDataHelper.getStoredNibp());
+        po2_paramvalue_textview.setText(waveDataHelper.getStoredSpo2());
+        pr_paramvalue_textview.setText(waveDataHelper.getStoredPR());
+        resp_paramvalue_textview.setText(waveDataHelper.getStoredResp());
 
 //waveDataHelper.getStoredHR()
-        pvc_textview.setText(waveDataHelper.getStoredPvc());
-        spo2_textview.setText(waveDataHelper.getStoredSpo2());
-        pr_textview.setText(waveDataHelper.getStoredPR());
-        nibp_textview.setText(waveDataHelper.getStoredNibp());
-        resp_textview.setText(waveDataHelper.getStoredResp());
-        time_button.setText(waveDataHelper.getTime());
+        time_textview.setText(waveDataHelper.getTime());
 
     }
 
@@ -256,12 +312,32 @@ public class DrawPathTestActivity extends Activity {
     private void refreshWaveData(int waveFlag) {
         if (isdownloadMonitorData) {
             switch (waveFlag) {
+                /*private TextView id_101;
+    private TextView id_102;
+    private TextView id_01;
+    private TextView id_02;*/
                 case 101:
 //                    101的波形
-                    surfacetest_view_101.refreshWave(waveDataHelper.getStoredWave_15(MonitorBean.WAVE_ID_101));
+                    final WaveFormBeanShell shell_101 = waveDataHelper.getStoredWave_15(MonitorBean.WAVE_ID_101);
+                    surfacetest_view_101.refreshWave(shell_101);
+                    id_101.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            id_101.setText(shell_101.getWaveProperty());
+                        }
+                    });
+
                     break;
                 case 102:
-                    surfacetest_view_102.refreshWave(waveDataHelper.getStoredWave_15(MonitorBean.WAVE_ID_102));
+                    final WaveFormBeanShell shell_102 =waveDataHelper.getStoredWave_15(MonitorBean.WAVE_ID_102);
+                    surfacetest_view_102.refreshWave(shell_102);
+                    id_102.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            id_102.setText(shell_102.getWaveProperty());
+                        }
+                    });
+
                     break;
 //            case 54:
 //                surfacetest_view_54.refreshWave(waveDataHelper.getStoredWave_54());
@@ -274,10 +350,25 @@ public class DrawPathTestActivity extends Activity {
 //                surfacetest_view_80.refreshWave(waveDataHelper.getStoredWave_80());
 //                break;
                 case 1:
-                    surfacetest_view_01.refreshWave(waveDataHelper.getStoredWave_01());
+                    final WaveFormBeanShell shell_01 = waveDataHelper.getStoredWave_01();
+                    surfacetest_view_01.refreshWave(shell_01);
+                    id_01.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            id_01.setText(shell_01.getWaveProperty());
+                        }
+                    });
+
                     break;
                 case 2:
-                    surfacetest_view_02.refreshWave(waveDataHelper.getStoredWave_02());
+                    final WaveFormBeanShell shell_02 =waveDataHelper.getStoredWave_02();
+                    surfacetest_view_02.refreshWave(shell_02);
+                    id_02.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            id_02.setText(shell_02.getWaveProperty());
+                        }
+                    });
                     break;
                 default:
                     break;
