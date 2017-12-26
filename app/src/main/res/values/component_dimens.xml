@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<dimen name="component_title_font">@dimen/txt_size_10</dimen>-->
+    <!--<dimen name="component_inputtext_font">@dimen/txt_size_13</dimen>-->
+    <!--<dimen name="component_title_height">@dimen/dip_20</dimen>-->
+    <!--<dimen name="component_input_height">@dimen/dip_27</dimen>-->
+    <!--<dimen name="component_input_padding">@dimen/dip_6</dimen>-->
+    <!--<dimen name="component_input_half_padding">@dimen/dip_8</dimen>-->
+    <!--<dimen name="component_margin">@dimen/dip_8</dimen>-->
+    <!--<dimen name="component_margin_half">@dimen/dip_4</dimen>-->
+
+</resources>

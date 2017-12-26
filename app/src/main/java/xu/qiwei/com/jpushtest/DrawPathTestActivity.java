@@ -265,10 +265,10 @@ public class DrawPathTestActivity extends Activity {
         surfacetest_view_02 = (SurfaceTestView) findViewById(R.id.surfacetest_view_02);
         surfacetest_view_102 = (SurfaceTestView) findViewById(R.id.surfacetest_view_102);
 
-        surfacetest_view_101.setTotalWaveCount(5);
+        surfacetest_view_101.setTotalWaveCount(3);
         surfacetest_view_01.setTotalWaveCount(8);
         surfacetest_view_02.setTotalWaveCount(8);
-        surfacetest_view_102.setTotalWaveCount(5);
+        surfacetest_view_102.setTotalWaveCount(3);
 
         surfacetest_view_101.setMaxY(160);
         surfacetest_view_101.setMinY(120);

@@ -40,23 +40,23 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     private Path mPath = new Path();
     private float x;
     private float y;
-//    private float BASELINE = -1;
+    //    private float BASELINE = -1;
 //    private float MULTIPLE_TIMES = -1;
-    private static final int REFRESH_HEADER_WIDTH = 15;
+    private  int REFRESH_HEADER_WIDTH = 30;
     private RectF befRect = new RectF(0, 0, 0, 0);
     private RectF aftRect = new RectF(0, 0, 0, 0);
-//    private static final int FLAT_WAVE = 50;
+    //    private static final int FLAT_WAVE = 50;
     private WaveDrawFinishCallBack waveDrawFinishCallBack;
-//    倍率
+    //    倍率
     private float yRate;
-//偏移量
+    //偏移量
     private float yOffset;
-//    容错率(必须<1/2)
-    private static final float FAULT_TOLERANT=1f/3f;
+    //    容错率(必须<1/2)
+    private static final float FAULT_TOLERANT = 1f / 3f;
 
-//    波形正常最大值
+    //    波形正常最大值
     private int maxY = 0;
-//    波形正常最小值
+    //    波形正常最小值
     private int minY = 0;
 
     public int getMaxY() {
@@ -79,6 +79,8 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     int currentWaveCount = 0;
     //    在这个控件中一共需要放置的波形数量
     private int totalWaveCount = 3;
+//    速度单位
+    private int speed = 7;
 
     public void setTotalWaveCount(int totalWaveCount) {
         this.totalWaveCount = totalWaveCount;
@@ -126,12 +128,14 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     public void surfaceCreated(SurfaceHolder holder) {
         isDrawing = true;
 //        FAULT_TOLERANT = FAULT_TOLERANT>(1/2f)?(1/3f):(FAULT_TOLERANT);
-        if (maxY==0) {
+        if (maxY == 0) {
             maxY = 200;
         }
-        float  h =(float) getHeight();
-        yOffset = (h)*FAULT_TOLERANT;
-        yRate = (h*(1f-FAULT_TOLERANT*2))/(maxY - minY);
+        float h = (float) getHeight();
+        yOffset = (h) * FAULT_TOLERANT;
+        yRate = (h * (1f - FAULT_TOLERANT * 2)) / (maxY - minY);
+
+        REFRESH_HEADER_WIDTH = getWidth()/50;
 
 //        new Thread(this).start();
         //        波形y值在200到(200-FLAT_WAVE)之间
@@ -167,8 +171,13 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
     }
 
     private void drawing() {
+//        boolean isNeedLock = count % 2== 0;
+//        boolean isNeedUnLock = count % 2== 1;
         try {
-            mCanvas = mSurfaceHolder.lockCanvas();
+//            if (isNeedLock) {
+                mCanvas = mSurfaceHolder.lockCanvas();
+//            }
+
             Paint befPaint = new Paint();
             befPaint.setColor(Color.BLACK);
             Paint aftPaint = new Paint();
@@ -180,10 +189,11 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             mCanvas.drawRect(befRect, befPaint);
 
             mCanvas.drawPath(mPath, paint);
-            aftRect.set(x + REFRESH_HEADER_WIDTH, 0, x + 2 * REFRESH_HEADER_WIDTH, getHeight());
+            aftRect.set(x , 0, x +  REFRESH_HEADER_WIDTH, getHeight());
             mCanvas.drawRect(aftRect, aftPaint);
-        } finally {
-            if (mCanvas != null) {
+        }
+        finally {
+            if (mCanvas != null ) {
                 mSurfaceHolder.unlockCanvasAndPost(mCanvas);
             }
         }
@@ -202,6 +212,7 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
             WaveFormBeanShell waveFormBeanShell = (WaveFormBeanShell) msg.obj;
             List<WaveFormBean> list = waveFormBeanShell.getWaveFormBeanList();
             int count = 0;
+            int tempSpeed = 0;
             float viewWidth = getWidth();
             float widthSpace = viewWidth / (list.size() * totalWaveCount);
 //            只有当计算出单个ｘ大于０时才能开始绘制和计算信息
@@ -215,7 +226,11 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
                         mPath.moveTo(x, y);
                     }
                     mPath.lineTo(x, y);
-                    drawing();
+                    if (tempSpeed==speed) {
+                        drawing();
+                        tempSpeed = 0;
+                    }
+                    tempSpeed++;
                     count++;
                 }
                 currentWaveCount++;
@@ -243,10 +258,10 @@ public class SurfaceTestView extends SurfaceView implements SurfaceHolder.Callba
         }
     }
 
-//    wavey:１６位转１０位后的数字
+    //    wavey:１６位转１０位后的数字
     private float caculatedY(int wavey) {
 //        int result = (int) (BASELINE - wavey * MULTIPLE_TIMES);
-        float result = ((float)(maxY-wavey))*yRate+yOffset;
+        float result = ((float) (maxY - wavey)) * yRate + yOffset;
         return result;
     }
 

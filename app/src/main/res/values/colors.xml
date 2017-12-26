@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#ececec</color>
+    <color name="colorPrimaryDark">#ececec</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorBoard">#005ECA</color>
+    <color name="text_blue_color">#00a4fc</color>
+    <color name="color_gray">#999999</color>
+
+    <color name="input_textcolor">#444444</color>
+
+    <!--模板的提示框-->
+    <color name="module_group_title_text_color">#195bbc</color>
+    <color name="module_child_title_text_color">#4c4c4c</color>
+    <color name="module_group_bg_color">#f2f2f2</color>
+    <color name="module_childlist_divier">#e3e3e3</color>
+    <color name="module_group_bg_notclick_color">#e3e3e3</color>
+    <color name="module_group_bg_clicked_color">#195bbc</color>
+
+    <color name="jkda_bg_color">#FDE9DE</color>
+    <color name="app_bg_color">#D1E3E7</color>
+    <color name="status_button_clicked_bg">#cccccc</color>
+    <color name="whiteColor">#FFFFFF</color>
+    <color name="status_button_clicked_text">#999999</color>
+    <color name="task_bg1">#61B0E9</color>
+    <color name="task_bg2">#7F60E9</color>
+    <color name="task_bg3">#58D369</color>
+    <color name="task_bg4">#EA7E62</color>
+    <color name="lightRedColor">#DB7093</color>
+    <color name="tip_top_bg">#b7ac97</color>
+
+    <!--网络状态的显示-->
+    <color name="neton_bg">#00a4fc</color>
+    <color name="netoff_gb">#fc0000</color>
+    <!--自定义键盘-->
+    <color name="lightblack">#ff202020</color>
+    <!--柱状图背景-->
+    <color name="zhu_bg">#ededed</color>
+    <!--柱状图已用背景-->
+    <color name="zhu_used_bg">#0099ff</color>
+    <!--柱状图未用背景-->
+    <color name="zhu_unused_bg">#cccccc</color>
+    <!--高危相关的颜色-->
+    <color name="highrisk_bg">#cc3333</color>
+    <color name="midrisk_bg">#ff9900</color>
+    <color name="lowrisk_bg">#ff9900</color>
+
+    <color name="dark_blue">#1250ab</color>
+
+    <color name="component_linecolor">#a0a0a0</color>
 </resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="base_component_size">10dp</dimen>
+    <dimen name="base_component_layout_size">10dp</dimen>
+    <dimen name="base_component_half_size">10dp</dimen>
+    <dimen name="base_font_size">10dp</dimen>
+<dimen name="default_paddingtopbot">10dp</dimen>
+    <integer name="tt_id">9000</integer>
+</resources>
+ 

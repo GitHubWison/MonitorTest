@@ -66,4 +66,22 @@
         android:layout_height="wrap_content"
         android:onClick="cacularYTest"
         />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="先进先出"
+        android:onClick="queueTest"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="radiobutton"
+        android:onClick="groupTest"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="waveviewv2"
+        android:onClick="toWaveViewV2"
+        />
 </LinearLayout>
